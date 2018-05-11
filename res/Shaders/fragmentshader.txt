@@ -1,0 +1,60 @@
+#version 400 core
+
+in vec2 uvpass;
+in vec3 surfacenormal;
+in vec3 light[5];
+in vec3 tocamera;
+in vec3 passtangent;
+in vec3 passbitangent;
+
+out vec4 out_color;
+
+uniform sampler2D textureSampler;
+uniform sampler2D textureSamplerS;
+uniform sampler2D textureSamplerN;
+
+uniform vec3 lightcolor[5];
+
+uniform float shine;
+uniform float reflectivity;
+uniform vec3 attenuation[5];
+uniform vec3 basecolor;
+uniform float time;
+
+void main(void)
+{
+vec3 normalizednormal;
+    if(time>0){
+     normalizednormal = normalize(texture(textureSamplerN,uvpass*10+(time/2)).xyz*2-1);
+    }
+    else
+        {
+        normalizednormal = normalize(texture(textureSamplerN,uvpass*10).xyz*2-1);
+        }
+    vec3 normalizedtocamera = normalize(tocamera);
+
+    vec3 sumdiffuse = vec3(0.0);
+    vec3 sumspec=vec3(0.0);
+
+    for(int i=0;i<5;i++){
+        float distance = length(light[i]);
+        float attfactor=attenuation[i].x+(attenuation[i].y*distance)+(attenuation[i].z*distance*distance);
+        float attenuationa = pow(1.0 - clamp(distance / attenuation[i].x, 0.0, 1.0), attenuation[i].y);
+        vec3 normalizedlight = normalize(light[i]);
+        float dotn= dot(normalizednormal,normalizedlight);
+        float brightness = max(dotn,0.0);
+        vec3 lightdirection=-normalizedlight;
+        vec3 reflecteddir=reflect(lightdirection,normalizednormal);
+        float specularfactor=dot(reflecteddir,normalizedtocamera);
+        specularfactor=max(specularfactor,0.0);
+        float damp = pow(specularfactor,10);
+        sumdiffuse = sumdiffuse +  (brightness * lightcolor[i])*attenuationa;
+        sumspec= sumspec + (damp*texture(textureSamplerS,uvpass*10).xyz*lightcolor[i])*attenuationa;
+     }
+     sumdiffuse = max(sumdiffuse,0.2);
+
+
+    vec3 col=vec3(0,0,0);
+    if(basecolor==col) out_color= vec4(sumdiffuse,1.0) * texture(textureSampler,uvpass*10)+vec4(sumspec,0);
+    else out_color=vec4(basecolor,1);
+}

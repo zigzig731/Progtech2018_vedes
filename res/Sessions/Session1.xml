@@ -1,0 +1,36 @@
+<Session>
+    <Wave>
+        <WaveComponent>
+            <type>1</type>
+            <amount>10</amount>
+            <timeInterval>2</timeInterval>
+        </WaveComponent>
+        <WaveComponent>
+            <type>2</type>
+            <amount>11</amount>
+           <timeInterval>1</timeInterval>
+        </WaveComponent>
+        <WaveComponent>
+            <type>3</type>
+            <amount>6</amount>
+            <timeInterval>0.5</timeInterval>
+        </WaveComponent>
+    </Wave>
+    <Wave>
+        <WaveComponent>
+            <type>4</type>
+            <amount>10</amount>
+            <timeInterval>2</timeInterval>
+        </WaveComponent>
+        <WaveComponent>
+            <type>5</type>
+            <amount>11</amount>
+            <timeInterval>1</timeInterval>
+        </WaveComponent>
+        <WaveComponent>
+            <type>6</type>
+            <amount>6</amount>
+            <timeInterval>0.5</timeInterval>
+        </WaveComponent>
+    </Wave>
+</Session>

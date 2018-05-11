@@ -1,0 +1,50 @@
+#version 400 core
+
+in vec3 position;
+in vec2 texturecoords;
+in vec3 normal;
+in vec3 tangent;
+
+out vec2 uvpass;
+out vec3 surfacenormal;
+out vec3 light[5];
+out vec3 tocamera;
+out vec3 passtangent;
+out vec3 passbitangent;
+
+uniform mat4 transformationmatrix;
+uniform mat4 projectionmatrix;
+uniform mat4 viewmatrix;
+uniform vec3 lightposition[5];
+
+void main(void)
+{
+    vec4 worldPosition = transformationmatrix * vec4(position,1.0);
+    mat4 modelViewMatrix = viewmatrix * transformationmatrix;
+    vec4 positionRelativeToCam = modelViewMatrix * vec4(position,1.0);
+   	gl_Position = projectionmatrix * positionRelativeToCam;
+
+    passtangent=tangent;
+
+   	uvpass = texturecoords;
+
+   	vec3 surfacenormal = (modelViewMatrix * vec4(normal,0.0)).xyz;
+
+    vec3 norm = normalize(surfacenormal);
+    vec3 tang = normalize((modelViewMatrix*vec4(tangent,0.0)).xyz);
+    vec3 bitang= normalize(cross(norm,tang));
+
+    mat3 totangentspace= mat3(
+    tang.x,bitang.x,norm.x,
+    tang.y,bitang.y,norm.y,
+    tang.z,bitang.z,norm.z
+    );
+
+    for(int i=0;i<5;i++){
+   		light[i]=totangentspace *( lightposition[i] - worldPosition.xyz);
+   	}
+
+   	tocamera = totangentspace * (-positionRelativeToCam.xyz);
+
+    float distance = length(positionRelativeToCam.xyz);
+}
