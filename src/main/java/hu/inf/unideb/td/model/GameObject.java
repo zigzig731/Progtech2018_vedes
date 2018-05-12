@@ -1,11 +1,11 @@
 package hu.inf.unideb.td.model;
 
+import hu.inf.unideb.td.model.managers.GameObjectManager;
 import hu.inf.unideb.td.view.Renderer;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public abstract class GameObject {
     public Vector3f position = new Vector3f(0, 0, 0), rotation = new Vector3f(0, 0, 0);

@@ -1,8 +1,8 @@
 package test;
 
 import hu.inf.unideb.td.model.*;
-import org.joml.Vector3f;
-import org.junit.Assert;
+import hu.inf.unideb.td.model.gameObjects.Tower;
+import hu.inf.unideb.td.model.managers.GameObjectManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +12,8 @@ public class TowerTest {
     @Before
     public void setUp()
     {
-      //  Path.addWaypoint(new Vector3f(0,0,0));
+        SetupScene.setupModels();
+       // Path.addWaypoint(new Vector3f(0,0,0));
       //  GameObjectManager.add(new Enemy_Runner());
      //   GameObjectManager.gameObjects.get(0).position=new Vector3f(0,1,4);
      //   GameObjectManager.add(new Enemy_Runner());
@@ -20,7 +21,7 @@ public class TowerTest {
      //   GameObjectManager.add(new Enemy_Runner());
      //   GameObjectManager.gameObjects.get(2).position=new Vector3f(0,0,11);
         System.out.println(GameObjectManager.gameObjects.size());
-        tower=new Tower();
+       // tower=new Tower();
       //  tower.position=new Vector3f(0,0,0);
     }
 

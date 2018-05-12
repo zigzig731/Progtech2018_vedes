@@ -1,5 +1,6 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.mapElements;
 
+import hu.inf.unideb.td.model.Entity;
 import hu.inf.unideb.td.view.Renderer;
 import org.joml.Vector3f;
 

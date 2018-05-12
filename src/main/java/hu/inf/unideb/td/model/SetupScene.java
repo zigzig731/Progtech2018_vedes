@@ -1,5 +1,8 @@
 package hu.inf.unideb.td.model;
 
+import hu.inf.unideb.td.model.managers.LightManager;
+import hu.inf.unideb.td.model.managers.MaterialManager;
+import hu.inf.unideb.td.model.managers.ModelManager;
 import org.joml.Vector3f;
 
 public class SetupScene {

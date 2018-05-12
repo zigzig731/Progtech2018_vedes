@@ -1,7 +1,8 @@
 package hu.inf.unideb.td.model;
 
+import hu.inf.unideb.td.model.managers.MaterialManager;
+import hu.inf.unideb.td.model.managers.ModelManager;
 import org.joml.Vector3f;
-import org.lwjgl.Sys;
 
 public class Entity {
     private MaterialInstance material;

@@ -1,5 +1,8 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.gameObjects;
 
+import hu.inf.unideb.td.model.*;
+import hu.inf.unideb.td.model.mapElements.Path;
+import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 

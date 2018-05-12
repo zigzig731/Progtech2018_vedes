@@ -1,6 +1,7 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.utility;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
+import hu.inf.unideb.td.model.Model;
 import hu.inf.unideb.td.model.SessionManagement.Session;
 import hu.inf.unideb.td.model.SessionManagement.Wave;
 import hu.inf.unideb.td.model.SessionManagement.WaveComponent;
@@ -141,7 +142,7 @@ public class Loader {
     {
         Session session = new Session();
         try {
-            FileReader fileReader=new FileReader("res/Sessions/"+name+".xml");
+            FileReader fileReader=new FileReader("src/main/resources/Sessions/"+name+".xml");
             JAXBContext context = JAXBContext.newInstance(Session.class,Wave.class, WaveComponent.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             session=(Session)unmarshaller.unmarshal(fileReader);

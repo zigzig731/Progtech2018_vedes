@@ -1,8 +1,10 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.gameObjects.enemies;
 
+import hu.inf.unideb.td.model.Entity;
+import hu.inf.unideb.td.model.gameObjects.Enemy;
 import org.joml.Vector3f;
 
-public class Enemy_Slow extends Enemy{
+public class Enemy_Slow extends Enemy {
     public Enemy_Slow()
     {
         super.setSpeed(2);

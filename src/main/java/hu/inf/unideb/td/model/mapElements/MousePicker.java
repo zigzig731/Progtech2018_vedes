@@ -1,12 +1,13 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.mapElements;
 
 import hu.inf.unideb.td.Main;
+import hu.inf.unideb.td.model.utility.Maths;
+import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.Display;
 
 import java.nio.DoubleBuffer;
 

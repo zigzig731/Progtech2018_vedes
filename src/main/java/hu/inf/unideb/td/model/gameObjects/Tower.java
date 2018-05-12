@@ -1,5 +1,9 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.gameObjects;
 
+import hu.inf.unideb.td.model.Entity;
+import hu.inf.unideb.td.model.GameObject;
+import hu.inf.unideb.td.model.managers.GameObjectManager;
+import hu.inf.unideb.td.model.MaterialInstance;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -20,10 +24,10 @@ public class Tower extends GameObject {
         entities.add(new Entity("metal_base", "towergun"));
         entities.add(new Entity("metal_base", "towerbase"));
         entities.add(new Entity( new MaterialInstance(new Vector3f(0, 1, 0)), "rangeindicator"));
-        entities.get(2).setScale(range/10);
-        entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
-        lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
-        LightManager.add(lights.get(0));
+    //    entities.get(2).setScale(range/10);
+//       entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
+     //   lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
+      //  LightManager.add(lights.get(0));
     }
 
     public void getTargetsInRange() {

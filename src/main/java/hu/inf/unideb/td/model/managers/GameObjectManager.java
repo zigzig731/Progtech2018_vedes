@@ -1,9 +1,8 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.managers;
 
-import hu.inf.unideb.td.model.normalMappingObjConverter.NormalMappedObjLoader;
+import hu.inf.unideb.td.model.GameObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GameObjectManager {

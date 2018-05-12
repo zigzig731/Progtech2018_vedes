@@ -1,11 +1,10 @@
 package hu.inf.unideb.td.view;
 
 import hu.inf.unideb.td.model.*;
+import hu.inf.unideb.td.model.utility.Maths;
 import org.joml.Matrix4f;
 
-import java.util.List;
-
-import static hu.inf.unideb.td.model.Maths.createProjectionMatrix;
+import static hu.inf.unideb.td.model.utility.Maths.createProjectionMatrix;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glBindTexture;
@@ -71,7 +70,7 @@ public class Renderer {
 
     private void prepareinstance(Entity entity)
     {
-        Matrix4f transform=Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation().x,entity.getRotation().y,entity.getRotation().z,entity.getScale());
+        Matrix4f transform= Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation().x,entity.getRotation().y,entity.getRotation().z,entity.getScale());
         shader.loadTransformationMatrix(transform);
     }
 }

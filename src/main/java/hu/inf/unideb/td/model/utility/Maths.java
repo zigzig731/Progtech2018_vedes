@@ -1,13 +1,18 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.utility;
 
+import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+
 
 public class Maths {
     private static  final  float FOV = 70;
     private static  final  float NEARPLANE=0.01f;
     private static  final  float FARPLANE=100.0f;
 
+    /**
+     * {@link FOV}
+     */
     public static Matrix4f createTransformationMatrix(Vector3f translation, float rx, float ry, float rz, float scale)
     {
         Matrix4f matrix = new Matrix4f();

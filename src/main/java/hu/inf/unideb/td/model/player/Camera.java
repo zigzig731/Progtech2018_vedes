@@ -1,4 +1,4 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.player;
 
 import org.joml.Vector3f;
 

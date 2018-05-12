@@ -1,7 +1,20 @@
 package hu.inf.unideb.td;
 
 import hu.inf.unideb.td.model.*;
+import hu.inf.unideb.td.model.GameObject;
+import hu.inf.unideb.td.model.gameObjects.Enemy;
+import hu.inf.unideb.td.model.gameObjects.Tower;
 import hu.inf.unideb.td.model.SessionManagement.Session;
+import hu.inf.unideb.td.model.gameObjects.enemies.Enemy_Runner;
+import hu.inf.unideb.td.model.gameObjects.enemies.Enemy_Slow;
+import hu.inf.unideb.td.model.gameObjects.towers.AlapTorony;
+import hu.inf.unideb.td.model.managers.GameObjectManager;
+import hu.inf.unideb.td.model.managers.LightManager;
+import hu.inf.unideb.td.model.managers.MaterialManager;
+import hu.inf.unideb.td.model.mapElements.MousePicker;
+import hu.inf.unideb.td.model.mapElements.Path;
+import hu.inf.unideb.td.model.player.Camera;
+import hu.inf.unideb.td.model.utility.Loader;
 import hu.inf.unideb.td.view.Renderer;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.*;
@@ -82,7 +95,7 @@ public class Main {
 
         //=====================================================================================================
         SetupScene.setup();
-        Texture waypointDiffuse = new Texture(loader.loadTexture("res/Textures/red.png"));
+        Texture waypointDiffuse = new Texture(loader.loadTexture("src/main/resources/Textures/red.png"));
         MaterialManager.get("metal_waypoint").setDiffuse(waypointDiffuse);
         Entity turret=new Entity("metal_base","muzzleflash", new Vector3f(0,2f,4),new Vector3f(0,20,0),1f);
         Entity turreta=new Entity("metal_base","enemyHR", new Vector3f(0,2f,-10),new Vector3f(0,20,0),1f);

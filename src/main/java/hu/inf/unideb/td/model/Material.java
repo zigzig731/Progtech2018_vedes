@@ -1,5 +1,6 @@
 package hu.inf.unideb.td.model;
 
+import hu.inf.unideb.td.model.utility.Loader;
 import org.joml.Vector3f;
 
 public class Material {
@@ -29,9 +30,9 @@ public class Material {
 
     public Material(String textureName, float diffuseIntensity, float specularIntensity, float normalIntensity, float uvTileing) {
         Loader loader = new Loader();
-        this.diffuse = new Texture(loader.loadTexture("res/Textures/"+textureName+"/"+textureName+"_COL.png"));
-        this.specular = new Texture(loader.loadTexture("res/Textures/"+textureName+"/"+textureName+"_REFL.png"));
-        this.normal = new Texture(loader.loadTexture("res/Textures/"+textureName+"/"+textureName+"_NRM.png"));
+        this.diffuse = new Texture(loader.loadTexture("src/main/resources/Textures/"+textureName+"/"+textureName+"_COL.png"));
+        this.specular = new Texture(loader.loadTexture("src/main/resources/Textures/"+textureName+"/"+textureName+"_REFL.png"));
+        this.normal = new Texture(loader.loadTexture("src/main/resources/Textures/"+textureName+"/"+textureName+"_NRM.png"));
         this.diffuseIntensity = diffuseIntensity;
         this.specularIntensity = specularIntensity;
         this.normalIntensity = normalIntensity;

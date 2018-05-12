@@ -1,5 +1,7 @@
 package hu.inf.unideb.td.model;
 
+import hu.inf.unideb.td.model.player.Camera;
+import hu.inf.unideb.td.model.utility.Maths;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
@@ -9,8 +11,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 import static org.lwjgl.opengl.GL20.glUniform1i;
 
 public class StaticShader extends ShaderProgram{
-    private static final String VERTEX_FILE="res/Shaders/vertexshader.txt";
-    private static final String FRAGMENT_FILE="res/Shaders/fragmentshader.txt";
+    private static final String VERTEX_FILE="src/main/resources/Shaders/vertexshader.txt";
+    private static final String FRAGMENT_FILE="src/main/resources/Shaders/fragmentshader.txt";
 
     private static final int MAXLIGHTS = 5;
 

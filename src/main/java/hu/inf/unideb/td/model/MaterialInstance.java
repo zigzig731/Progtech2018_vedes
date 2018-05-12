@@ -1,5 +1,6 @@
 package hu.inf.unideb.td.model;
 
+import hu.inf.unideb.td.model.utility.Loader;
 import org.joml.Vector3f;
 
 public class MaterialInstance {
@@ -20,9 +21,9 @@ public class MaterialInstance {
     public MaterialInstance(Vector3f baseColor) {
         Loader loader = new Loader();
         String textureName = "basecolor";
-        this.diffuse = new Texture(loader.loadTexture("res/Textures/" + textureName + "/" + textureName + "_COL.png"));
-        this.specular = new Texture(loader.loadTexture("res/Textures/" + textureName + "/" + textureName + "_REFL.png"));
-        this.normal = new Texture(loader.loadTexture("res/Textures/" + textureName + "/" + textureName + "_NRM.png"));
+        this.diffuse = new Texture(loader.loadTexture("src/main/resources/Textures/" + textureName + "/" + textureName + "_COL.png"));
+        this.specular = new Texture(loader.loadTexture("src/main/resources/Textures/" + textureName + "/" + textureName + "_REFL.png"));
+        this.normal = new Texture(loader.loadTexture("src/main/resources/Textures/" + textureName + "/" + textureName + "_NRM.png"));
         this.diffuseIntensity = 1;
         this.specularIntensity = 1;
         this.normalIntensity = 1;

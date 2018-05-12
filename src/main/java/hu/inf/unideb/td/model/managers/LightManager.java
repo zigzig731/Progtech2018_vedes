@@ -1,5 +1,6 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.managers;
 
+import hu.inf.unideb.td.model.Light;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;

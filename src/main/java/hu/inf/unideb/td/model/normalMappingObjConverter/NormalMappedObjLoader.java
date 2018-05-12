@@ -1,6 +1,6 @@
 		package hu.inf.unideb.td.model.normalMappingObjConverter;
 
-		import hu.inf.unideb.td.model.Loader;
+		import hu.inf.unideb.td.model.utility.Loader;
         import hu.inf.unideb.td.model.Model;
         import org.joml.Vector2f;
 		import org.joml.Vector3f;
@@ -15,7 +15,7 @@
 
         public class NormalMappedObjLoader {
 
-            private static final String RES_LOC = "res/Models/";
+            private static final String RES_LOC = "src/main/resources/Models/";
 
             public static Model loadOBJ(String objFileName, Loader loader) {
                 FileReader isr = null;

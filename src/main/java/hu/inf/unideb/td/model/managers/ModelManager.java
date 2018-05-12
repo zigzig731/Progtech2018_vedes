@@ -1,5 +1,7 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.managers;
 
+import hu.inf.unideb.td.model.utility.Loader;
+import hu.inf.unideb.td.model.Model;
 import hu.inf.unideb.td.model.normalMappingObjConverter.NormalMappedObjLoader;
 
 import java.util.HashMap;

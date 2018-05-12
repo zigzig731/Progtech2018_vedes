@@ -1,4 +1,7 @@
-package hu.inf.unideb.td.model;
+package hu.inf.unideb.td.model.managers;
+
+import hu.inf.unideb.td.model.Material;
+import hu.inf.unideb.td.model.MaterialInstance;
 
 import java.util.HashMap;
 
