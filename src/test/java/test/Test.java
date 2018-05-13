@@ -17,8 +17,8 @@ public class Test {
     @Before
     public void setUp()
     {
-        Loader loader = new Loader();
-        Texture texture = new Texture(loader.loadTexture("src/main/resources/Textures/red.png"));
+    //    Loader loader = new Loader();
+    //    Texture texture = new Texture(loader.loadTexture("src/main/resources/Textures/red.png"));
      //   SetupScene.setup();
        // System.out.println(Path.waypoints.size());
        // System.out.println(Path.waypoints.size());

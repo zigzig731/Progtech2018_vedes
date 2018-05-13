@@ -11,6 +11,23 @@ public class Enemy extends GameObject {
     private float fittness;
     private Vector3f target = Path.getWaypoint(0);
     private int targetIndex = 0;
+
+    public float getHealt() {
+        return healt;
+    }
+
+    public void setHealt(float healt) {
+        this.healt = healt;
+    }
+
+    public float getMaxHealt() {
+        return maxHealt;
+    }
+
+    public void setMaxHealt(float maxHealt) {
+        this.maxHealt = maxHealt;
+    }
+
     private float healt = 100;
     private float maxHealt = 100;
     private MaterialInstance healthBarMat;
@@ -34,6 +51,14 @@ public class Enemy extends GameObject {
     public Enemy() {
         healthBarMat = new MaterialInstance(new Vector3f(0, 1, 0));
         entities.add(new Entity(healthBarMat, "healthbar"));
+        entities.get(0).setLocalPosition(new Vector3f(0, 3, 0));
+        position = new Vector3f(6, 0, 4);
+        entities.get(0).setScale(0.2f);
+    }
+
+    public Enemy(boolean test) {
+      //  healthBarMat = new MaterialInstance(new Vector3f(0, 1, 0));
+        entities.add(new Entity(true));
         entities.get(0).setLocalPosition(new Vector3f(0, 3, 0));
         position = new Vector3f(6, 0, 4);
         entities.get(0).setScale(0.2f);

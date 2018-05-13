@@ -2,8 +2,10 @@ package hu.inf.unideb.td.model.gameObjects;
 
 import hu.inf.unideb.td.model.Entity;
 import hu.inf.unideb.td.model.GameObject;
+import hu.inf.unideb.td.model.Light;
 import hu.inf.unideb.td.model.managers.GameObjectManager;
 import hu.inf.unideb.td.model.MaterialInstance;
+import hu.inf.unideb.td.model.managers.LightManager;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -13,9 +15,18 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class Tower extends GameObject {
     private float fireRate = 0.1f;
+
+    public float getDamage() {
+        return damage;
+    }
+
+    public void setDamage(float damage) {
+        this.damage = damage;
+    }
+
     private float damage = 5;
     private float lastShot;
-    private Enemy target = null;
+    public Enemy target = null;
     public float range = 10f;
 
     public List<Enemy> targetsInRange = new ArrayList<Enemy>();
@@ -24,10 +35,19 @@ public class Tower extends GameObject {
         entities.add(new Entity("metal_base", "towergun"));
         entities.add(new Entity("metal_base", "towerbase"));
         entities.add(new Entity( new MaterialInstance(new Vector3f(0, 1, 0)), "rangeindicator"));
-    //    entities.get(2).setScale(range/10);
-//       entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
-     //   lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
-      //  LightManager.add(lights.get(0));
+        entities.get(2).setScale(range/10);
+        entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
+        lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
+        LightManager.add(lights.get(0));
+    }
+
+    public Tower(boolean test) {
+        entities.add(new Entity(true));
+        entities.add(new Entity(true));
+        entities.add(new Entity( true));
+        entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
+        lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
+        LightManager.add(lights.get(0));
     }
 
     public void getTargetsInRange() {
@@ -61,7 +81,7 @@ public class Tower extends GameObject {
         entities.get(0).setRotation(new Vector3f(0, roty, 0));
     }
 
-    public void shoot()
+    private void shoot()
     {
         target.dealDamage(damage);
         lastShot=(float)glfwGetTime();

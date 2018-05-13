@@ -45,6 +45,11 @@ public class Entity {
         this.model = ModelManager.get(model);
     }
 
+    public Entity(boolean test) {
+        this.material = null;
+        this.model = null;
+    }
+
     public void increasePosition(float dx, float dy, float dz) {
         this.position.x += dx;
         this.position.y += dy;
