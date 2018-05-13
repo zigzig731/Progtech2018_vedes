@@ -1,6 +1,5 @@
 package test.towerTest;
 
-import hu.inf.unideb.td.model.GameObject;
 import hu.inf.unideb.td.model.gameObjects.Enemy;
 import hu.inf.unideb.td.model.gameObjects.Tower;
 import hu.inf.unideb.td.model.managers.GameObjectManager;
@@ -37,6 +36,6 @@ public class TowershootTest {
     @Test
     public void testMethods() {
         tower.shoot();
-        Assert.assertEquals(tower.target.getHealt(), tower.target.getMaxHealt() - tower.getDamage(), tower.getDamage());
+        Assert.assertEquals(tower.target.getHealth(), tower.target.getMaxHealt() - tower.getDamage(), tower.getDamage());
     }
 }

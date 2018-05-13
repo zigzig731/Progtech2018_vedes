@@ -1,6 +1,10 @@
-package hu.inf.unideb.td.model.mapElements;
+package hu.inf.unideb.td.model.player;
 
 import hu.inf.unideb.td.Main;
+import hu.inf.unideb.td.controller.ImputHandler;
+import hu.inf.unideb.td.model.gameObjects.Tower;
+import hu.inf.unideb.td.model.gameObjects.towers.AlapTorony;
+import hu.inf.unideb.td.model.managers.GameObjectManager;
 import hu.inf.unideb.td.model.utility.Maths;
 import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Matrix4f;
@@ -27,27 +31,19 @@ public class MousePicker {
         this.viewMatrix = Maths.createViewMatrix(camera);
     }
 
-    public Vector3f getCurrentRay() {
-        return currentRay;
-    }
-
     public void update() {
         viewMatrix = Maths.createViewMatrix(camera);
         currentRay = calculateMouseRay();
     }
 
     private Vector3f calculateMouseRay() {
-        DoubleBuffer b1 = BufferUtils.createDoubleBuffer(1);
-        DoubleBuffer b2 = BufferUtils.createDoubleBuffer(1);
-        glfwGetCursorPos(Main.window, b1, b2);
+        Vector2f mouse = ImputHandler.getMouse();
        // System.out.println("x : " + b1.get(0) + ", y = " + b2.get(0));
-        Vector2f normalizedCoords = getNormalizedDeviceCoords((float) b1.get(0), (float) b2.get(0));
+        Vector2f normalizedCoords = getNormalizedDeviceCoords(mouse.x,mouse.y);
         Vector4f clipCoords = new Vector4f(normalizedCoords.x, normalizedCoords.y, -1f, 1f);
         Vector4f eyeCoords = toEyeCoords(clipCoords);
         Vector3f worldRay = toWorldCoors(eyeCoords);
         return worldRay;
-       // return new Vector3f(0,0,0);
-
     }
 
     private Vector4f toEyeCoords(Vector4f clipCoors) {
@@ -79,21 +75,17 @@ public class MousePicker {
 
     public Vector3f get3DPoint()
     {
-//        if (glfwGetKey(Main.window, GLFW_KEY_R) == GLFW_PRESS) {
-//            //  eye += forward * moveSpeed * (float) delta;
-//            gridheight += 0.005;
-//        }
-//        if (glfwGetKey(Main.window, GLFW_KEY_F) == GLFW_PRESS) {
-//            //  eye -= forward * moveSpeed * (float)delta;
-//            gridheight -= 0.005;
-//        }
-//        System.out.println(gridheight);
-
-
         for(float i=0;i<10000;i+=0.1)
         {
             if(getPointOnRay(currentRay,i).y<gridheight) return getPointOnRay(currentRay,i);
         }
         return new Vector3f(0,0,0);
+    }
+
+    public void click()
+    {
+        Tower temp = new AlapTorony();
+        temp.position=new Vector3f((int)(((float)get3DPoint().x)/4.0f)*4+2,1,(int)(((float)get3DPoint().z)/4f)*4-2);
+        GameObjectManager.add(temp);
     }
 }

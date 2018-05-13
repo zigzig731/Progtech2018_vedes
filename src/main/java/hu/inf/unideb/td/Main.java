@@ -1,5 +1,6 @@
 package hu.inf.unideb.td;
 
+import hu.inf.unideb.td.controller.ImputHandler;
 import hu.inf.unideb.td.model.*;
 import hu.inf.unideb.td.model.GameObject;
 import hu.inf.unideb.td.model.gameObjects.Enemy;
@@ -11,7 +12,7 @@ import hu.inf.unideb.td.model.gameObjects.towers.AlapTorony;
 import hu.inf.unideb.td.model.managers.GameObjectManager;
 import hu.inf.unideb.td.model.managers.LightManager;
 import hu.inf.unideb.td.model.managers.MaterialManager;
-import hu.inf.unideb.td.model.mapElements.MousePicker;
+import hu.inf.unideb.td.model.player.MousePicker;
 import hu.inf.unideb.td.model.mapElements.Path;
 import hu.inf.unideb.td.model.player.Camera;
 import hu.inf.unideb.td.model.utility.Loader;
@@ -119,60 +120,48 @@ public class Main {
       //  System.out.println(session.getWaves().get(1).getWaveComponents().get(1).getType());
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-      //  GameObjectManager.add(new Tower());
-     //   GameObjectManager.gameObjects.get(0).increasePosition(2,1,-9);
-    //    GameObjectManager.add(new Tower());
-    //    GameObjectManager.gameObjects.get(1).increasePosition(12,-1,-8.5f);
 
         MousePicker picker = new MousePicker(camera,renderer.getProjectionmatrix());
 
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            camera.move(window);
+
+            ImputHandler.processInput(window, picker);
+
             renderer.prepare();
+
             shader.start();
 
-          //  turretgun.increaseRotation(0,1,0);
             shader.loadLights(LightManager.getLights());
             shader.loadViewMatrix(camera);
             shader.loadTexture();
             renderer.render(plane);
-            //renderer.render(terrain);
             renderer.render(road);
             renderer.render(water);
             renderer.render(building);
             renderer.render(gridunit);
-
             renderer.render(turret);
-            //renderer.render(turreta);
-          //renderer.render(turretgun);
+
             for(GameObject enemy:GameObjectManager.gameObjects)
             {
                 enemy.display(renderer);
                 enemy.update();
             }
+
+            Path.displayPath(renderer,waypointEntity);
+            shader.stop();
+
             if(glfwGetTime()-lasttime>1&&GameObjectManager.gameObjects.size()<30) {
                 if(GameObjectManager.gameObjects.size() % 2==0){
                   GameObjectManager.add(new Enemy_Slow());
                 } else GameObjectManager.add(new Enemy_Runner());
                 lasttime=(float)glfwGetTime();
             }
-            Path.displayPath(renderer,waypointEntity);
-            shader.stop();
+
             glfwSwapBuffers(window);
             glfwPollEvents();
             picker.update();
-            System.out.println(GameObjectManager.gameObjects.size());
-         //   System.out.format("%.3f %.3f %.3f %n",picker.get3DPoint().x,picker.get3DPoint().y,picker.get3DPoint().z);
-         //   System.out.format("%d %d %n",(int)(((float)picker.get3DPoint().x)/4.0f),(int)(((float)picker.get3DPoint().z)/4f)*-1);
             gridunit.setPosition(new Vector3f((int)(((float)picker.get3DPoint().x)/4.0f)*4,2,(int)(((float)picker.get3DPoint().z)/4f)*4));
-            if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1)==1)
-            {
-                Tower temp = new AlapTorony();
-                temp.position=new Vector3f((int)(((float)picker.get3DPoint().x)/4.0f)*4+2,1,(int)(((float)picker.get3DPoint().z)/4f)*4-2);
-                GameObjectManager.add(temp);
-            }
-            //GameObjectManager.gameObjects.get(0).position=picker.get3DPoint();
             GameObjectManager.clean();
         }
 

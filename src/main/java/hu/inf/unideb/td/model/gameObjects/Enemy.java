@@ -7,59 +7,97 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 /**
- * This class is inherited from the GameObject class.
- * Implements basic behaviour that is represented in every enemy.
+ * Ez az osztály a GameObject osztályból származik.
+ * Általános viselkedést implementál, mely minden ellenfélnek része.
  * @see hu.inf.unideb.td.model.GameObject
  */
 public class Enemy extends GameObject {
     /**
-     * This is the movement speed of the enemy.
+     * Ez az ellenfél mozgási sebessége.
+     * Minden ellenségtipusnál más értéket vehet fel.
      */
     private float speed = 3f;
     /**
-     * The fitness of an enemy represents how far the enemy has made it on the path towards the end of the map.
+     * A fittness azt mutatja hogy az ellenfél milyen messze jutott el az úton a pálya vége felé.
      */
     private float fittness;
     /**
-     * The enemies follow waypoints on the Path.
-     * This variable holds the currently followed waypoint.
-     * By default this is set to the first waypoint along the path.
+     * Az ellenfelek waypointokat követnek az úton.
+     * Ez a változó tárolja az éppen követett pontot.
+     * Alapértelmezett értéke az út első pontja.
+     * @see Path
      */
     private Vector3f target = Path.getWaypoint(0);
+    /**
+     * A targetIndex változó az éppen követett waypoint pathban lévő indexét tárolja.
+     * Alapértelmezetten az értéke 0
+     * @see Path
+     */
     private int targetIndex = 0;
-    private float healt = 100;
-    private float maxHealt = 100;
+    /**
+     * Ez a változó az ellenség maximum életét tárolja.
+     * Minden ellenségtipusnál más értéket vehet fel.
+     */
+    private float maxHealth = 100;
+    /**
+     * A health változó az ellenség pillanatnyi életéterejét tárolja.
+     * Alapból az értéke a maxHealth változó értékével egyenlő
+     */
+    private float health = maxHealth;
+    /**
+     * A healthBarMat változó az életerőcsik megjelenitéséhez szükséges MaterialInstance-t tárolja.
+     * Szine az ellenfél pillanatnyi életerejétől függ, melyet a health változóban tárolunk.
+     */
     private MaterialInstance healthBarMat;
 
 
     /**
-     * Ez a metódus visszaadja egy enemy életét.
+     * Ez a metódus visszaadja egy enemy pillanatnyi életét.
      * @return Egy enemy életereje.
      */
-    public float getHealt() {
-        return healt;
+    public float getHealth() {
+        return health;
     }
-
+    /**
+     * Ez a metódus visszaadja egy enemy maximum lehetséges életét.
+     * @return Egy enemy pillanatnyi életereje.
+     */
     public float getMaxHealt() {
-        return maxHealt;
+        return maxHealth;
     }
-
+    /**
+     * Ez a metódus visszaadja egy enemy mozgási sebességét.
+     * @return Egy enemy maximálisan lehetséges életereje.
+     */
     public float getSpeed() {
         return speed;
     }
-
+    /**
+     * Ez a metódus beállitja egy enemy mozgási sebességét.
+     * @param speed A beállitani kivánt mozgási sebesség.
+     */
     public void setSpeed(float speed) {
         this.speed = speed;
     }
-
+    /**
+     * Ez a metódus visszaadja egy enemy pillanatnyi fittnes értékét.
+     * @return Egy enemy mozgási sebessége.
+     */
     public float getFittness() {
         return fittness;
     }
-
+    /**
+     * Ez a metódus beállitja egy enemy pillanatnyi fittnes értékét.
+     * @param fittness  A beállitani kivánt fittness érték.
+     */
     public void setFittness(float fittness) {
         this.fittness = fittness;
     }
 
+    /**
+     * Az Enemy osztály konstruktora.
+     * létrehozza az Enemy GameObjectet alkotó Entityket.
+     */
     public Enemy() {
         healthBarMat = new MaterialInstance(new Vector3f(0, 1, 0));
         entities.add(new Entity(healthBarMat, "healthbar"));
@@ -67,7 +105,10 @@ public class Enemy extends GameObject {
         position = new Vector3f(6, 0, 4);
         entities.get(0).setScale(0.2f);
     }
-
+    /**
+     * Az Enemy osztály tesztekhez használt konstruktora, a grafikai elemek nélkül.
+     * @param test Ez csak egy eldobható paraméter, hogy megkülönböztessem a sima konstruktortól.
+     */
     public Enemy(boolean test) {
         healthBarMat = new MaterialInstance(true);
         entities.add(new Entity(true));
@@ -80,7 +121,7 @@ public class Enemy extends GameObject {
 
 
     /**
-     * A Path ról kéri le a waypointokat.
+     * Mindig az éppen aktuálisan követett waypoint felé mozgatja az enemy-t, ha az enemy a target adott sugarú körébe ért, a target változó értékét beállitja a pathon lévő következő waypointra. Amennyiben az nem létezik törli az enemy-t.
      * @see Path
      */
     private void move() {
@@ -99,13 +140,17 @@ public class Enemy extends GameObject {
 
     }
 
+    /**
+     * Az életerő csikot mindig úgy forgatja hogy az a kamera felé nézzen.
+     * @see Camera
+     */
     private void rotateHealthBar() {
         Vector3f lookAt = new Vector3f(position);
 
         lookAt.sub(Camera.position);
         float roty = (float) Math.toDegrees(new Vector2f(lookAt.x, lookAt.z).normalize().angle(new Vector2f(1, 0).normalize()));
         entities.get(0).setRotation(new Vector3f(0, roty, 45));
-        healthBarMat.setBaseColor(new Vector3f(1 - (float) healt / (float) maxHealt, (float) healt / (float) maxHealt, 0));
+        healthBarMat.setBaseColor(new Vector3f(1 - (float) health / (float) maxHealth, (float) health / (float) maxHealth, 0));
     }
 
     /**
@@ -113,12 +158,13 @@ public class Enemy extends GameObject {
       * @param damage A bvejövő sebzés értéke.
      */
     public void dealDamage(float damage) {
-        healt -= damage;
+        health -= damage;
     }
+
 
     @Override
     public void update() {
-        if (healt <= 0) destroy();
+        if (health <= 0) destroy();
         move();
         rotateHealthBar();
     }
