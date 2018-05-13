@@ -6,12 +6,36 @@ import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
+/**
+ * This class is inherited from the GameObject class.
+ * Implements basic behaviour that is represented in every enemy.
+ * @see hu.inf.unideb.td.model.GameObject
+ */
 public class Enemy extends GameObject {
+    /**
+     * This is the movement speed of the enemy.
+     */
     private float speed = 3f;
+    /**
+     * The fitness of an enemy represents how far the enemy has made it on the path towards the end of the map.
+     */
     private float fittness;
+    /**
+     * The enemies follow waypoints on the Path.
+     * This variable holds the currently followed waypoint.
+     * By default this is set to the first waypoint along the path.
+     */
     private Vector3f target = Path.getWaypoint(0);
     private int targetIndex = 0;
+    private float healt = 100;
+    private float maxHealt = 100;
+    private MaterialInstance healthBarMat;
 
+
+    /**
+     * Ez a metódus visszaadja egy enemy életét.
+     * @return Egy enemy életereje.
+     */
     public float getHealt() {
         return healt;
     }
@@ -19,10 +43,6 @@ public class Enemy extends GameObject {
     public float getMaxHealt() {
         return maxHealt;
     }
-
-    private float healt = 100;
-    private float maxHealt = 100;
-    private MaterialInstance healthBarMat;
 
     public float getSpeed() {
         return speed;
@@ -55,9 +75,14 @@ public class Enemy extends GameObject {
         position = new Vector3f(6, 0, 4);
         entities.get(0).setScale(0.2f);
         entities.add(new Entity(true));
-        entities.get(1).setLocalRotation(new Vector3f(0,180,0));
+        entities.get(1).setLocalRotation(new Vector3f(0, 180, 0));
     }
 
+
+    /**
+     * A Path ról kéri le a waypointokat.
+     * @see Path
+     */
     private void move() {
         Vector3f dir = new Vector3f(target);
         dir.sub(position);
@@ -66,7 +91,7 @@ public class Enemy extends GameObject {
             if (targetIndex < Path.waypoints.size()) target = Path.getWaypoint(targetIndex);
             else destroy();
         }
-        entities.get(1).setRotation(new Vector3f(0,180+(float) Math.toDegrees(new Vector2f(dir.x, dir.z).normalize().angle(new Vector2f(1, 0).normalize())),0));
+        entities.get(1).setRotation(new Vector3f(0, 180 + (float) Math.toDegrees(new Vector2f(dir.x, dir.z).normalize().angle(new Vector2f(1, 0).normalize())), 0));
         dir.normalize(0.1f);
         dir.mul(speed);
         fittness += dir.length();
@@ -83,6 +108,10 @@ public class Enemy extends GameObject {
         healthBarMat.setBaseColor(new Vector3f(1 - (float) healt / (float) maxHealt, (float) healt / (float) maxHealt, 0));
     }
 
+    /**
+     * Az adott enemy életét csökkenti a bejövő sebzés értékével.
+      * @param damage A bvejövő sebzés értéke.
+     */
     public void dealDamage(float damage) {
         healt -= damage;
     }
