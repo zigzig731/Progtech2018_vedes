@@ -11,6 +11,7 @@ import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Tower extends GameObject {
@@ -18,10 +19,6 @@ public class Tower extends GameObject {
 
     public float getDamage() {
         return damage;
-    }
-
-    public void setDamage(float damage) {
-        this.damage = damage;
     }
 
     private float damage = 5;
@@ -34,19 +31,19 @@ public class Tower extends GameObject {
     public Tower() {
         entities.add(new Entity("metal_base", "towergun"));
         entities.add(new Entity("metal_base", "towerbase"));
-        entities.add(new Entity( new MaterialInstance(new Vector3f(0, 1, 0)), "rangeindicator"));
-        entities.get(2).setScale(range/10);
-        entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
-        lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
+        entities.add(new Entity(new MaterialInstance(new Vector3f(0, 1, 0)), "rangeindicator"));
+        entities.get(2).setScale(range / 10);
+        entities.get(2).setLocalPosition(new Vector3f(0, 1.5f, 0));
+        lights.add(new Light(position, new Vector3f(1f, 0.7f, 0f), 0, new Vector3f(3f, 0.5f, 0f)));
         LightManager.add(lights.get(0));
     }
 
     public Tower(boolean test) {
         entities.add(new Entity(true));
         entities.add(new Entity(true));
-        entities.add(new Entity( true));
-        entities.get(2).setLocalPosition(new Vector3f(0,1.5f,0));
-        lights.add(new Light(position,new Vector3f(1f,0.7f,0f),0, new Vector3f(3f,0.5f,0f)));
+        entities.add(new Entity(true));
+        entities.get(2).setLocalPosition(new Vector3f(0, 1.5f, 0));
+        lights.add(new Light(position, new Vector3f(1f, 0.7f, 0f), 0, new Vector3f(3f, 0.5f, 0f)));
         LightManager.add(lights.get(0));
     }
 
@@ -81,16 +78,15 @@ public class Tower extends GameObject {
         entities.get(0).setRotation(new Vector3f(0, roty, 0));
     }
 
-    private void shoot()
-    {
+    public void shoot() {
         target.dealDamage(damage);
-        lastShot=(float)glfwGetTime();
+        lastShot = (float) glfwGetTime();
         lights.get(0).setIntensity(10);
     }
 
     @Override
     public void update() {
-        if (target != null) if(!isValidTarget()) target = null;
+        if (target != null) if (!isValidTarget()) target = null;
         if (target == null) {
             getTargetsInRange();
             if (targetsInRange.size() > 0) {
@@ -98,9 +94,9 @@ public class Tower extends GameObject {
             }
         } else {
             updatePose();
-            if((float)glfwGetTime()-lastShot>fireRate) shoot();
+            if ((float) glfwGetTime() - lastShot > fireRate) shoot();
 
         }
-        if((float)glfwGetTime()-lastShot>0.02) lights.get(0).setIntensity(0);
+        if ((float) glfwGetTime() - lastShot > 0.02) lights.get(0).setIntensity(0);
     }
 }

@@ -30,6 +30,9 @@ public class MaterialInstance {
         this.uvTileing = 1;
         this.baseColor = baseColor;
     }
+    public MaterialInstance(boolean test) {
+
+    }
 
     public MaterialInstance(Material mat, float diffuseIntensity, float specularIntensity, float normalIntensity, float uvTileing) {
         this.diffuse = mat.getDiffuse();

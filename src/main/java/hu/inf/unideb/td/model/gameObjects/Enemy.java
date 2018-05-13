@@ -16,16 +16,8 @@ public class Enemy extends GameObject {
         return healt;
     }
 
-    public void setHealt(float healt) {
-        this.healt = healt;
-    }
-
     public float getMaxHealt() {
         return maxHealt;
-    }
-
-    public void setMaxHealt(float maxHealt) {
-        this.maxHealt = maxHealt;
     }
 
     private float healt = 100;
@@ -57,11 +49,13 @@ public class Enemy extends GameObject {
     }
 
     public Enemy(boolean test) {
-      //  healthBarMat = new MaterialInstance(new Vector3f(0, 1, 0));
+        healthBarMat = new MaterialInstance(true);
         entities.add(new Entity(true));
         entities.get(0).setLocalPosition(new Vector3f(0, 3, 0));
         position = new Vector3f(6, 0, 4);
         entities.get(0).setScale(0.2f);
+        entities.add(new Entity(true));
+        entities.get(1).setLocalRotation(new Vector3f(0,180,0));
     }
 
     private void move() {

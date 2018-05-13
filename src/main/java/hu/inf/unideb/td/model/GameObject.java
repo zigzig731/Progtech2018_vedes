@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GameObject {
+    public Vector3f getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector3f position) {
+        this.position = position;
+    }
+
     public Vector3f position = new Vector3f(0, 0, 0), rotation = new Vector3f(0, 0, 0);
     public float scale=1;
     public List<Entity> entities = new ArrayList<Entity>();
@@ -41,17 +49,6 @@ public abstract class GameObject {
           //  entity.setRotation(new Vector3f(this.rotation).add(entity.getLocalRotation()));
             renderer.render(entity);
         }
-    }
-    public void increasePosition(float dx, float dy, float dz) {
-        this.position.x += dx;
-        this.position.y += dy;
-        this.position.z += dz;
-    }
-
-    public void increasePotation(float dx, float dy, float dz) {
-        this.rotation.x += dx;
-        this.rotation.y += dy;
-        this.rotation.z += dz;
     }
 
     public void destroy()

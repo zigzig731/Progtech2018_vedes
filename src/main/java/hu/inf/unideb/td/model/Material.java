@@ -42,9 +42,9 @@ public class Material {
     public Material(Vector3f baseColor) {
         Loader loader = new Loader();
         String textureName="basecolor";
-        this.diffuse = new Texture(loader.loadTexture("res/Textures/"+textureName+"/"+textureName+"_COL.png"));
-        this.specular = new Texture(loader.loadTexture("res/Textures/"+textureName+"/"+textureName+"_REFL.png"));
-        this.normal = new Texture(loader.loadTexture("res/Textures/"+textureName+"/"+textureName+"_NRM.png"));
+        this.diffuse = new Texture(loader.loadTexture("src/main/resources/Textures/"+textureName+"/"+textureName+"_COL.png"));
+        this.specular = new Texture(loader.loadTexture("src/main/resources/Textures/"+textureName+"/"+textureName+"_REFL.png"));
+        this.normal = new Texture(loader.loadTexture("src/main/resources/Textures/"+textureName+"/"+textureName+"_NRM.png"));
         this.diffuseIntensity = 1;
         this.specularIntensity = 1;
         this.normalIntensity = 1;

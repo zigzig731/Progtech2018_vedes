@@ -19,10 +19,6 @@ public class Entity {
         this.localPosition = localPosition;
     }
 
-    public Vector3f getLocalRotation() {
-        return localRotation;
-    }
-
     public void setLocalRotation(Vector3f localRotation) {
         this.localRotation = localRotation;
     }
@@ -50,36 +46,8 @@ public class Entity {
         this.model = null;
     }
 
-    public void increasePosition(float dx, float dy, float dz) {
-        this.position.x += dx;
-        this.position.y += dy;
-        this.position.z += dz;
-    }
-
-    public void increaseRotation(float dx, float dy, float dz) {
-        this.rotation.x += dx;
-        this.rotation.y += dy;
-        this.rotation.z += dz;
-    }
-
-    public void increaseLocalPosition(float dx, float dy, float dz) {
-        this.position.x += dx;
-        this.position.y += dy;
-        this.position.z += dz;
-    }
-
-    public void increaseLocalRotation(float dx, float dy, float dz) {
-        this.rotation.x += dx;
-        this.rotation.y += dy;
-        this.rotation.z += dz;
-    }
-
     public MaterialInstance getMaterial() {
         return material;
-    }
-
-    public void setMaterial(MaterialInstance material) {
-        this.material = material;
     }
 
     public Model getModel() {
@@ -92,6 +60,10 @@ public class Entity {
 
     public Vector3f getPosition() {
         return position;
+    }
+
+    public Vector3f getLocalRotation() {
+        return localRotation;
     }
 
     public void setPosition(Vector3f position) {
