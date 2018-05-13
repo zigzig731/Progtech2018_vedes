@@ -11,8 +11,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 import static org.lwjgl.opengl.GL20.glUniform1i;
 
 public class StaticShader extends ShaderProgram{
-    private static final String VERTEX_FILE="src/main/resources/Shaders/vertexshader.txt";
-    private static final String FRAGMENT_FILE="src/main/resources/Shaders/fragmentshader.txt";
+    private static final String VERTEX_FILE="Shaders/vertexshader.txt";
+    private static final String FRAGMENT_FILE="Shaders/fragmentshader.txt";
 
     private static final int MAXLIGHTS = 5;
 
