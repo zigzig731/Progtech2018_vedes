@@ -95,8 +95,9 @@ public class Main {
         Path.addWaypoint(new Vector3f(94,9,-22));
 
         //=====================================================================================================
-        SetupScene.setup();
         Texture waypointDiffuse = new Texture(loader.loadTexture("Textures/red.png"));
+        SetupScene.setup();
+
         MaterialManager.get("metal_waypoint").setDiffuse(waypointDiffuse);
         Entity turret=new Entity("metal_base","muzzleflash", new Vector3f(0,2f,4),new Vector3f(0,20,0),1f);
         Entity turreta=new Entity("metal_base","enemyHR", new Vector3f(0,2f,-10),new Vector3f(0,20,0),1f);

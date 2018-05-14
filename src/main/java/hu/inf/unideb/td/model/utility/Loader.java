@@ -46,7 +46,9 @@ public class Loader {
     public int loadTexture(String filePath) {
         int textureID = 0;
         try {
-            InputStream in = new FileInputStream(getClass().getClassLoader().getResource(filePath).getFile());
+
+            InputStream in = getClass().getClassLoader().getResourceAsStream(filePath);
+           // InputStream in = new FileInputStream(getClass().getClassLoader().getResource(filePath).getFile());
             PNGDecoder decoder = new PNGDecoder(in);
             ByteBuffer buffer = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
             decoder.decode(buffer, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);
@@ -116,7 +118,8 @@ public class Loader {
     public int loadShader(String file, int type) {
         StringBuilder shaderSource = new StringBuilder();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(getClass().getClassLoader().getResource(file).getFile()));
+            InputStream in = getClass().getClassLoader().getResourceAsStream(file);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
                 shaderSource.append(line).append("//\n");
@@ -134,6 +137,7 @@ public class Loader {
             System.err.println("Could not compile shader!");
             System.exit(-1);
         }
+        System.out.println(file);
         return shaderID;
     }
 
@@ -141,7 +145,7 @@ public class Loader {
     {
         Session session = new Session();
         try {
-            FileReader fileReader=new FileReader(getClass().getClassLoader().getResource("Sessions/"+name+".xml").getFile());
+            FileReader fileReader=new FileReader(getClass().getClassLoader().getResourceAsStream("Sessions/"+name+".xml").toString());
             JAXBContext context = JAXBContext.newInstance(Session.class,Wave.class, WaveComponent.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             session=(Session)unmarshaller.unmarshal(fileReader);

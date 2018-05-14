@@ -5,27 +5,17 @@
         import org.joml.Vector2f;
 		import org.joml.Vector3f;
 
-		import java.io.BufferedReader;
-		import java.io.File;
-		import java.io.FileNotFoundException;
-		import java.io.FileReader;
-		import java.io.IOException;
-		import java.util.ArrayList;
+        import java.io.*;
+        import java.util.ArrayList;
 		import java.util.List;
 
         public class NormalMappedObjLoader {
 
-            private static final String RES_LOC = "src/main/resources/Models/";
+            private static final String RES_LOC = "Models/";
 
             public static Model loadOBJ(String objFileName, Loader loader) {
-                FileReader isr = null;
-                File objFile = new File(RES_LOC + objFileName + ".obj");
-                try {
-                    isr = new FileReader(objFile);
-                } catch (FileNotFoundException e) {
-                    System.err.println("File not found in res; don't use any extention");
-                }
-                BufferedReader reader = new BufferedReader(isr);
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(NormalMappedObjLoader.class.getClassLoader().getResourceAsStream(RES_LOC + objFileName + ".obj")));
                 String line;
                 List<VertexNM> vertices = new ArrayList<VertexNM>();
                 List<Vector2f> textures = new ArrayList<Vector2f>();
