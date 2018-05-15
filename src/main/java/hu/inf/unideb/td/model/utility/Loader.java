@@ -145,12 +145,14 @@ public class Loader {
     {
         Session session = new Session();
         try {
-            FileReader fileReader=new FileReader(getClass().getClassLoader().getResourceAsStream("Sessions/"+name+".xml").toString());
+          //  FileReader fileReader=new FileReader(getClass().getClassLoader().getResource("Sessions/"+name+".xml").getFile());
+            InputStream in = getClass().getClassLoader().getResourceAsStream("Sessions/"+name+".xml");
             JAXBContext context = JAXBContext.newInstance(Session.class,Wave.class, WaveComponent.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            session=(Session)unmarshaller.unmarshal(fileReader);
+            session=(Session)unmarshaller.unmarshal(in);
             //System.out.println(session.getWaves().get(1).getWaveComponents().get(1).getType());
-            fileReader.close();
+        //    fileReader.close();
+            in.close();
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

@@ -118,11 +118,17 @@ public class Main {
         float lasttime=0;
 
         Session session = loader.loadSession("Session1");
-      //  System.out.println(session.getWaves().get(1).getWaveComponents().get(1).getType());
+        System.out.println(session.getWaves().get(0).getWaveComponents().get(1).getType());
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
         MousePicker picker = new MousePicker(camera,renderer.getProjectionmatrix());
+
+        Integer currentEnemy=2;
+        Integer currentEnemyAmount=5;
+        Integer alreadySpawned=0;
+        Integer currentWaveComponent=-1;
+
 
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -152,10 +158,27 @@ public class Main {
             Path.displayPath(renderer,waypointEntity);
             shader.stop();
 
-            if(glfwGetTime()-lasttime>1&&GameObjectManager.gameObjects.size()<30) {
-                if(GameObjectManager.gameObjects.size() % 2==0){
-                  GameObjectManager.add(new Enemy_Slow());
-                } else GameObjectManager.add(new Enemy_Runner());
+            if(glfwGetTime()-lasttime>1) {
+              /*  if()
+                {
+                currentWaveComponent++;
+                alreadyspawned=0;
+                    currentEnemy = session.getWaves().get(1).getWaveComponents().get(1).getType();
+                    currentEnemyAmount=session.getWaves().get(1).getWaveComponents().get(1).getAmount();
+                }*/
+                Enemy current=null;
+                switch (currentEnemy)
+                {
+                    case 1 : {
+                        current = new Enemy_Slow();
+                    }break;
+                    case 2 : {
+                        current = new Enemy_Runner();
+                    }break;
+                }
+                if(alreadySpawned<=currentEnemyAmount)
+                GameObjectManager.add(current);
+                alreadySpawned++;
                 lasttime=(float)glfwGetTime();
             }
 
