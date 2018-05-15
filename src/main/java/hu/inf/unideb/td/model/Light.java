@@ -24,17 +24,8 @@ public class Light {
         return new Vector3f(color).mul(intensity);
     }
 
-    public float getIntensity() {
-        return intensity;
-    }
-
     public void setIntensity(float intensity) {
         this.intensity = intensity;
-    }
-
-    public void setColor(Vector3f color) {
-        this.color = color;
-
     }
 
     public Light(Vector3f position, Vector3f color, float intensity, Vector3f attenuation) {

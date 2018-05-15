@@ -4,14 +4,32 @@ import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
+/**
+ * Különböző megjelenitéshez szükséges matematikai számolásokat elvégző osztály.
+ */
 
 public class Maths {
+    /**
+     * A kamera látószöge.
+     */
     private static  final  float FOV = 70;
+    /**
+     * A kamera közeli vágósikja.
+     */
     private static  final  float NEARPLANE=0.01f;
+    /**
+     * A kamera távoli vágósikja.
+     */
     private static  final  float FARPLANE=100.0f;
 
     /**
-     * {@link FOV}
+     * A transzformációs mátrix kiszámolására szolgáló függvény.
+     * @param translation Az eltolás mértéke.
+     * @param rx Forgás az x tengelyen.
+     * @param ry Forgás az y tengelyen.
+     * @param rz Forgás az z tengelyen.
+     * @param scale A nagyitás mértéke.
+     * @return A kiszámolt transzformációs mátrix.
      */
     public static Matrix4f createTransformationMatrix(Vector3f translation, float rx, float ry, float rz, float scale)
     {
@@ -25,6 +43,11 @@ public class Maths {
         return matrix;
     }
 
+    /**
+     * A view mátrix kiszámolását végző metódus.
+     * @param camera A kamera mely alapján a view mátrixot számoljuk.
+     * @return A kiszámolt view mátrix.
+     */
     public static Matrix4f createViewMatrix(Camera camera) {
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.identity();
@@ -36,6 +59,10 @@ public class Maths {
         return viewMatrix;
     }
 
+    /**
+     * A vetitési mátrix kiszámolására szolgáló metódus.
+     * @return A kiszámolt vetitési mátrix.
+     */
     public static Matrix4f createProjectionMatrix(){
 
         float aspectRatio = (float) 1920 / (float) 1080;

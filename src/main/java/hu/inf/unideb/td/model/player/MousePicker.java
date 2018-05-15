@@ -88,8 +88,8 @@ public class MousePicker {
 
     /**
      * Ezzel a függvénnyel konvertáljuk át az eye koordinátákat world koordinátákká.
-     * @param eyeCoords
-     * @return
+     * @param eyeCoords A konvertálni kivánt koordináták.
+     * @return A konvertált koordináták.
      */
     private Vector3f toWorldCoors(Vector4f eyeCoords) {
         Matrix4f invertedView = new Matrix4f(viewMatrix).invert();
@@ -97,6 +97,12 @@ public class MousePicker {
         return new Vector3f(rayWorld.x, rayWorld.y, rayWorld.z).normalize();
     }
 
+    /**
+     * Ezzel a függvényel kapjuk meg a normalizált eszköz koordinátákat az egér poziciójából.
+     * @param mouseX Az egér x tengelyen felvett helyzete.
+     * @param mouseY Az egér y tengelyen felvett helyzete.
+     * @return A kiszámitott koordináták.
+     */
     private Vector2f getNormalizedDeviceCoords(float mouseX, float mouseY) {
         float x = (2f * mouseX) / 1280 - 1;
         float y = (2f * mouseY) / 720 - 1;

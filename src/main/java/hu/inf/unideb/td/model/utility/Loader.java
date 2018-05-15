@@ -27,11 +27,33 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL46.GL_TEXTURE_MAX_ANISOTROPY;
 
+/**
+ * Ez az osztály különböző fájlok betöltésére szolgál.
+ */
 public class Loader {
+    /**
+     * A programban valaha beolvasott összes VAO-t tárolja.
+     */
     private List<Integer> vaos = new ArrayList<Integer>();
+    /**
+     * A programban valaha beolvasott összes VBO-t tárolja.
+     */
     private List<Integer> vbos = new ArrayList<Integer>();
+    /**
+     * A programban valaha beolvasott összes textúrát tárolja.
+     */
     private List<Integer> textures = new ArrayList<Integer>();
 
+    /**
+     * A modellek betöltésére szolgáló metódus.
+     * A modell adatait egy VAO-ba tölti
+     * @param positions A vao-ba töltendő vertexpoziciók.
+     * @param UVs A vao-ba töltendő UV koordináták.
+     * @param normals A vao-ba töltendő normálvektorok.
+     * @param tangents A vao-ba töltendő tangentek.
+     * @param indices A vao-ba töltendő indexek.
+     * @return A beolvasott model/VAO opengl által használt ID-ja.
+     */
     public Model loadToVAO(float[] positions, float[] UVs, float[] normals, float[] tangents, int[] indices) {
         int vao = createVAO();
         bindindIndicesBuffer(indices);
@@ -43,6 +65,11 @@ public class Loader {
         return new Model(vao, indices.length);
     }
 
+    /**
+     * A textúrák betöltésére szolgáló metódus.
+     * @param filePath A fájl elérési útvonala.
+     * @return A beolvasott textúra opengl által használt ID-ja.
+     */
     public int loadTexture(String filePath) {
         int textureID = 0;
         try {
@@ -81,6 +108,10 @@ public class Loader {
         return textureID;
     }
 
+    /**
+     * A VAO-k létrehozását végző metódus.
+     * @return A létrehozott VAO ID-je.
+     */
     private int createVAO() {
         int vao = glGenVertexArrays();
         glBindVertexArray(vao);
@@ -88,6 +119,12 @@ public class Loader {
         return vao;
     }
 
+    /**
+     * Az adatok attribútlistában való tárolását megvalósitó függvénye.
+     * @param attribute Az attribútum indexe.
+     * @param size Az adatok egységmérete.
+     * @param data Az eltárolni kivánt adat.
+     */
     private void storeDataInAttributeList(int attribute, int size, float[] data) {
         int vbo = glGenBuffers();
         vbos.add(vbo);
@@ -101,6 +138,11 @@ public class Loader {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+
+    /**
+     * Az indexbufferek létrehozását végző függvény.
+     * @param indices Az eltárolni kivánt indexek.
+     */
     private void bindindIndicesBuffer(int[] indices) {
         int vbo = glGenBuffers();
         vbos.add(vbo);
@@ -111,10 +153,19 @@ public class Loader {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
     }
 
+    /**
+     * A VAO-k törléséért felelős függvény.
+     */
     private void unbindVAO() {
         glBindVertexArray(0);
     }
 
+    /**
+     * A shaderek betöltését és forditását végző függvény.
+     * @param file A fájl elérési útvonala.
+     * @param type A betölteni kivánt shader tipusa.
+     * @return A beolvasott shader ID-ja.
+     */
     public int loadShader(String file, int type) {
         StringBuilder shaderSource = new StringBuilder();
         try {
@@ -140,6 +191,12 @@ public class Loader {
         return shaderID;
     }
 
+    /**
+     * A Sessionök betöltésére szolgáló függvény.
+     * @param name A betölteni kivánt xml neve.
+     * @return A betöltött Session.
+     * @see Session
+     */
     public Session loadSession(String name)
     {
         Session session = new Session();
@@ -162,6 +219,9 @@ public class Loader {
         return session;
     }
 
+    /**
+     *A betöltött fájlok felszabaditását végző függvény.
+     */
     public void cleanup() {
         for (int vao : vaos) {
             glDeleteVertexArrays(vao);

@@ -202,7 +202,7 @@ public class Main {
             gridunit.setPosition(new Vector3f((int) (((float) picker.get3DPoint().x) / 4.0f) * 4, 2, (int) (((float) picker.get3DPoint().z) / 4f) * 4));
             GameObjectManager.clean();
         }
-
+        loader.cleanup();
     }
 
     public static void main(String[] args) {

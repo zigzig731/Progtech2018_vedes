@@ -30,6 +30,11 @@ public class MaterialInstance {
         this.uvTileing = 1;
         this.baseColor = baseColor;
     }
+    /**
+     * A MaterialInstance osztály tesztekhez használt konstruktora, a grafikai elemek nélkül.
+     *
+     * @param test Ez csak egy eldobható paraméter, hogy megkülönböztessem a sima konstruktortól.
+     */
     public MaterialInstance(boolean test) {
 
     }
