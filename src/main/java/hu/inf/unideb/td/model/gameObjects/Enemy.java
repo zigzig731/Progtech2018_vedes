@@ -10,6 +10,7 @@ import org.joml.Vector3f;
 /**
  * Ez az osztály a GameObject osztályból származik.
  * Általános viselkedést implementál, mely minden ellenfélnek része.
+ *
  * @see hu.inf.unideb.td.model.GameObject
  */
 public class Enemy extends GameObject {
@@ -19,7 +20,11 @@ public class Enemy extends GameObject {
      */
     private float speed = 3f;
 
+    /**
+     * A fittness azt mutatja hogy az ellenfél milyen messze jutott el az úton a pálya vége felé.
+     */
     private float damage = 10;
+
     /**
      * A fittness azt mutatja hogy az ellenfél milyen messze jutott el az úton a pálya vége felé.
      */
@@ -28,12 +33,15 @@ public class Enemy extends GameObject {
      * Az ellenfelek waypointokat követnek az úton.
      * Ez a változó tárolja az éppen követett pontot.
      * Alapértelmezett értéke az út első pontja.
+     *
      * @see Path
      */
     private Vector3f target = Path.getWaypoint(0);
+
     /**
      * A targetIndex változó az éppen követett waypoint pathban lévő indexét tárolja.
      * Alapértelmezetten az értéke 0
+     *
      * @see Path
      */
     private int targetIndex = 0;
@@ -53,48 +61,63 @@ public class Enemy extends GameObject {
      */
     private MaterialInstance healthBarMat;
 
+    /**
+     * Ez a metódus beállitja egy enemy sebzését.
+     * @param damage A beállitani kivánt sebzés.
+     */
     public void setDamage(float damage) {
         this.damage = damage;
     }
 
     /**
      * Ez a metódus visszaadja egy enemy pillanatnyi életét.
+     *
      * @return Egy enemy életereje.
      */
     public float getHealth() {
         return health;
     }
+
     /**
      * Ez a metódus visszaadja egy enemy maximum lehetséges életét.
+     *
      * @return Egy enemy pillanatnyi életereje.
      */
     public float getMaxHealt() {
         return maxHealth;
     }
+
     /**
      * Ez a metódus visszaadja egy enemy mozgási sebességét.
+     *
      * @return Egy enemy maximálisan lehetséges életereje.
      */
     public float getSpeed() {
         return speed;
     }
+
     /**
      * Ez a metódus beállitja egy enemy mozgási sebességét.
+     *
      * @param speed A beállitani kivánt mozgási sebesség.
      */
     public void setSpeed(float speed) {
         this.speed = speed;
     }
+
     /**
      * Ez a metódus visszaadja egy enemy pillanatnyi fittnes értékét.
+     *
      * @return Egy enemy mozgási sebessége.
      */
     public float getFittness() {
         return fittness;
     }
+
     /**
      * Ez a metódus beállitja egy enemy pillanatnyi fittnes értékét.
-     * @param fittness  A beállitani kivánt fittness érték.
+     *
+     * @param fittness A beállitani kivánt fittness érték.
      */
     public void setFittness(float fittness) {
         this.fittness = fittness;
@@ -111,8 +134,10 @@ public class Enemy extends GameObject {
         position = new Vector3f(6, 0, 4);
         entities.get(0).setScale(0.2f);
     }
+
     /**
      * Az Enemy osztály tesztekhez használt konstruktora, a grafikai elemek nélkül.
+     *
      * @param test Ez csak egy eldobható paraméter, hogy megkülönböztessem a sima konstruktortól.
      */
     public Enemy(boolean test) {
@@ -127,7 +152,8 @@ public class Enemy extends GameObject {
 
 
     /**
-     * Mindig az éppen aktuálisan követett waypoint felé mozgatja az enemy-t, ha az enemy a target adott sugarú körébe ért, a target változó értékét beállitja a pathon lévő következő waypointra. Amennyiben az nem létezik törli az enemy-t.
+     * Mindig az éppen aktuálisan követett waypoint felé mozgatja az enemy-t, ha az enemy a target adott sugarú körébe ért, a target változó értékét beállitja a pathon lévő következő waypointra. Amennyiben az nem létezik azt jelenti, hogy az út végére értünk. Ekkor törli önmagát, és a sebzés értékének megfelelő számú életerőt levesz a playertől.
+     *
      * @see Path
      */
     private void move() {
@@ -151,6 +177,7 @@ public class Enemy extends GameObject {
 
     /**
      * Az életerő csikot mindig úgy forgatja hogy az a kamera felé nézzen.
+     *
      * @see Camera
      */
     private void rotateHealthBar() {
@@ -164,13 +191,18 @@ public class Enemy extends GameObject {
 
     /**
      * Az adott enemy életét csökkenti a bejövő sebzés értékével.
-      * @param damage A bvejövő sebzés értéke.
+     *
+     * @param damage A bvejövő sebzés értéke.
      */
     public void dealDamage(float damage) {
         health -= damage;
     }
 
 
+    /**
+     * Ez egy enemy update metódusa, melyet minden frameben meghivunk a mainloopban.
+     * Az ellenfél megmozgatásáért felelős.
+     */
     @Override
     public void update() {
         if (health <= 0) destroy();

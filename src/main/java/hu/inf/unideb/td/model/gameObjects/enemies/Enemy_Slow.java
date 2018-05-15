@@ -2,8 +2,15 @@ package hu.inf.unideb.td.model.gameObjects.enemies;
 
 import hu.inf.unideb.td.model.Entity;
 import hu.inf.unideb.td.model.gameObjects.Enemy;
+import hu.inf.unideb.td.model.gameObjects.Tower;
 import org.joml.Vector3f;
 
+
+/**
+ * Ez az osztály az Enemy osztályból származik.
+ * Egy ellenféltipust definiál.
+ * @see Enemy
+ */
 public class Enemy_Slow extends Enemy {
     public Enemy_Slow()
     {
