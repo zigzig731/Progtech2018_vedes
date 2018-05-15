@@ -33,6 +33,8 @@ public class Main {
 
     public static long window;
 
+    public static int health=100;
+
     public void run() {
         init();
         loop();
@@ -88,12 +90,14 @@ public class Main {
         Path.addWaypoint(new Vector3f(38, 1, -42));
         Path.addWaypoint(new Vector3f(38, 1, -14));
         Path.addWaypoint(new Vector3f(50, 1, -14));
+        /*
         Path.addWaypoint(new Vector3f(70, 9, -14));
         Path.addWaypoint(new Vector3f(78, 9, -14));
         Path.addWaypoint(new Vector3f(78, 9, -6));
         Path.addWaypoint(new Vector3f(94, 9, -6));
         Path.addWaypoint(new Vector3f(94, 9, -22));
         Path.addWaypoint(new Vector3f(94, 9, -22));
+        */
 
         //=====================================================================================================
         Texture waypointDiffuse = new Texture(loader.loadTexture("Textures/red.png"));
@@ -119,7 +123,7 @@ public class Main {
         float lasttime = 0;
 
         Session session = loader.loadSession("Session1");
-        System.out.println(session.getWaves().get(0).getWaveComponents().get(1).getType());
+        //System.out.println(session.getWaves().get(0).getWaveComponents().get(1).getType());
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -134,6 +138,7 @@ public class Main {
 
 
         while (!glfwWindowShouldClose(window)) {
+            if(health<=0) System.exit(0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             ImputHandler.processInput(window, picker);
@@ -176,7 +181,6 @@ public class Main {
 
                 }
                 Enemy current = null;
-                System.out.println(alreadySpawned + " " + currentEnemyAmount);
                 switch (currentEnemy) {
                     case 1: {
                         current = new Enemy_Slow();
@@ -192,7 +196,6 @@ public class Main {
                 alreadySpawned++;
                 lasttime = (float) glfwGetTime();
             }
-
             glfwSwapBuffers(window);
             glfwPollEvents();
             picker.update();

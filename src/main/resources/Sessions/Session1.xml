@@ -8,7 +8,7 @@
         <WaveComponent>
             <type>2</type>
             <amount>5</amount>
-           <timeInterval>2</timeInterval>
+           <timeInterval>1</timeInterval>
         </WaveComponent>
         <WaveComponent>
             <type>1</type>

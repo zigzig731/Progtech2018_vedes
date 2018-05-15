@@ -1,5 +1,6 @@
 package hu.inf.unideb.td.model.gameObjects;
 
+import hu.inf.unideb.td.Main;
 import hu.inf.unideb.td.model.*;
 import hu.inf.unideb.td.model.mapElements.Path;
 import hu.inf.unideb.td.model.player.Camera;
@@ -17,6 +18,8 @@ public class Enemy extends GameObject {
      * Minden ellenségtipusnál más értéket vehet fel.
      */
     private float speed = 3f;
+
+    private float damage = 10;
     /**
      * A fittness azt mutatja hogy az ellenfél milyen messze jutott el az úton a pálya vége felé.
      */
@@ -50,6 +53,9 @@ public class Enemy extends GameObject {
      */
     private MaterialInstance healthBarMat;
 
+    public void setDamage(float damage) {
+        this.damage = damage;
+    }
 
     /**
      * Ez a metódus visszaadja egy enemy pillanatnyi életét.
@@ -130,7 +136,10 @@ public class Enemy extends GameObject {
         if (dir.length() < 0.4) {
             targetIndex++;
             if (targetIndex < Path.waypoints.size()) target = Path.getWaypoint(targetIndex);
-            else destroy();
+            else {
+                Main.health -= damage;
+                destroy();
+            }
         }
         entities.get(1).setRotation(new Vector3f(0, 180 + (float) Math.toDegrees(new Vector2f(dir.x, dir.z).normalize().angle(new Vector2f(1, 0).normalize())), 0));
         dir.normalize(0.1f);

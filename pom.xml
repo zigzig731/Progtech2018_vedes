@@ -55,6 +55,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <lwjgl.version>3.1.6</lwjgl.version>
+        <mainClass>hu.inf.unideb.td.Main</mainClass>
     </properties>
 
     <profiles>
@@ -214,20 +215,24 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
+                <configuration>
+                    <mainClass>
+                        ${mainClass}
+                    </mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
                         <goals>
-                            <goal>
-                                java
-                            </goal>
+                            <goal>clean</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>
-                        hu.inf.unideb.td.Main
-                    </mainClass>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -296,7 +301,7 @@
                             </descriptorRefs>
                             <archive>
                                 <manifest>
-                                    <mainClass>hu.inf.unideb.td.Main</mainClass>
+                                    <mainClass>${mainClass}</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
@@ -333,7 +338,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
                 <configuration>
-                    <mainClass>hu.inf.unideb.td.Main</mainClass>
+                    <mainClass>${mainClass}</mainClass>
                     <vendor>University of Debrecen</vendor>
                 </configuration>
             </plugin>

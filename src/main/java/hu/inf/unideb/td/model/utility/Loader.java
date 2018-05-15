@@ -137,7 +137,6 @@ public class Loader {
             System.err.println("Could not compile shader!");
             System.exit(-1);
         }
-        System.out.println(file);
         return shaderID;
     }
 
