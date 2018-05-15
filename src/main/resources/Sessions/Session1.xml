@@ -3,12 +3,12 @@
         <WaveComponent>
             <type>1</type>
             <amount>5</amount>
-            <timeInterval>1</timeInterval>
+            <timeInterval>2</timeInterval>
         </WaveComponent>
         <WaveComponent>
             <type>2</type>
             <amount>5</amount>
-           <timeInterval>1</timeInterval>
+           <timeInterval>2</timeInterval>
         </WaveComponent>
         <WaveComponent>
             <type>1</type>
