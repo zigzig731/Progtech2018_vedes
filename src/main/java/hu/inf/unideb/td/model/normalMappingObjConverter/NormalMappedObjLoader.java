@@ -9,10 +9,22 @@
         import java.util.ArrayList;
 		import java.util.List;
 
+        /**
+         * Az obj fileok betöltésére szolgáló osztály,
+         */
         public class NormalMappedObjLoader {
 
+            /**
+             * Az obj file elérési útjának része.
+             */
             private static final String RES_LOC = "Models/";
 
+            /**
+             * Az obj filet betöltő metódus.
+             * @param objFileName Fájlnév
+             * @param loader A loader osztály mellyel betöltjük az objt.
+             * @return A betöltött modell.
+             */
             public static Model loadOBJ(String objFileName, Loader loader) {
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(NormalMappedObjLoader.class.getClassLoader().getResourceAsStream(RES_LOC + objFileName + ".obj")));
@@ -74,7 +86,13 @@
                 return loader.loadToVAO(verticesArray, texturesArray, normalsArray, tangentsArray, indicesArray);
             }
 
-            //NEW
+            /**
+             * A tangentek kiszámitását végző függvény.
+             * @param v0 Első térpont
+             * @param v1 Második térpont
+             * @param v2 Harmadik térpont
+             * @param textures Textúrakoordináták
+             */
             private static void calculateTangents(VertexNM v0, VertexNM v1, VertexNM v2,
                                                   List<Vector2f> textures) {
                 Vector3f v0p = new Vector3f(v0.getPosition().x,v0.getPosition().y,v0.getPosition().z);
@@ -101,6 +119,13 @@
                 v2.addTangent(tangent);
             }
 
+            /**
+             * Egy vertex feldolgozását végző metódus.
+             * @param vertex Egy vertex adatai.
+             * @param vertices A vertexek listája.
+             * @param indices Az indexek listája.
+             * @return Egy feldolgozott vertex.
+             */
             private static VertexNM processVertex(String[] vertex, List<VertexNM> vertices,
                                                   List<Integer> indices) {
                 int index = Integer.parseInt(vertex[0]) - 1;
@@ -118,6 +143,11 @@
                 }
             }
 
+            /**
+             * Az indexek listából tömbé konvertálását végző metódus.
+             * @param indices Az indexek listája.
+             * @return Az indexek tömbje.
+             */
             private static int[] convertIndicesListToArray(List<Integer> indices) {
                 int[] indicesArray = new int[indices.size()];
                 for (int i = 0; i < indicesArray.length; i++) {
@@ -126,6 +156,17 @@
                 return indicesArray;
             }
 
+            /**
+             * Adatok tömbökké konvertálását végző metódus.
+             * @param vertices A vertexek listája.
+             * @param textures Textúrakoordináták litsája.
+             * @param normals Normálisok listája.
+             * @param verticesArray Vertexek tömbje.
+             * @param texturesArray Textúrakoordináták tömbje.
+             * @param normalsArray Normálisok tömbje.
+             * @param tangentsArray Tangentek tömbje.
+             * @return
+             */
             private static float convertDataToArrays(List<VertexNM> vertices, List<Vector2f> textures,
                                                      List<Vector3f> normals, float[] verticesArray, float[] texturesArray,
                                                      float[] normalsArray, float[] tangentsArray) {
@@ -156,6 +197,15 @@
                 return furthestPoint;
             }
 
+            /**
+             * A már feldolgozott vertexek kezelését végző metódus.
+             * @param previousVertex Előző térpont.
+             * @param newTextureIndex Új textúra index.
+             * @param newNormalIndex Új normális index.
+             * @param indices Indexek
+             * @param vertices Vertexek
+             * @return Egy vertex.
+             */
             private static VertexNM dealWithAlreadyProcessedVertex(VertexNM previousVertex, int newTextureIndex,
                                                                    int newNormalIndex, List<Integer> indices, List<VertexNM> vertices) {
                 if (previousVertex.hasSameTextureAndNormal(newTextureIndex, newNormalIndex)) {
@@ -178,6 +228,10 @@
                 }
             }
 
+            /**
+             * Nem használt vertexek törlését végző metódus.
+             * @param vertices A vertexek listája.
+             */
             private static void removeUnusedVertices(List<VertexNM> vertices) {
                 for (VertexNM vertex : vertices) {
                     vertex.averageTangents();

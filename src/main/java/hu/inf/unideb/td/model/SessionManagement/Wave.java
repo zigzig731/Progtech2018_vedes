@@ -16,11 +16,18 @@ public class Wave {
      */
     @XmlElement(name="WaveComponent")
     List<WaveComponent> waveComponents = new ArrayList<WaveComponent>();
-
+    /**
+     * A komponenseit tartalmazó lista lekérését végrehajtó metódus.
+     * @return A lekért lista.
+     */
     public List<WaveComponent> getWaveComponents() {
         return waveComponents;
     }
 
+    /**
+     * A hullám komponenseinek beállitására szolgáló metódus.
+     * @param waveComponents A beállitani kivánt hullámkomponensek.
+     */
     public void setWaveComponents(List<WaveComponent> waveComponents) {
         this.waveComponents = waveComponents;
     }
