@@ -268,19 +268,19 @@
                     </target>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
-                <!--<version>2.17</version>-->
-                <!--<configuration>-->
-                    <!--<configLocation>-->
-                        <!--/res/config/checkstyle.xml-->
-                    <!--</configLocation>-->
-                    <!--<encoding>UTF-8</encoding>-->
-                    <!--<consoleOutput>true</consoleOutput>-->
-                    <!--<failsOnError>true</failsOnError>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <configLocation>
+                        /res/config/checkstyle.xml
+                    </configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>

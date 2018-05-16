@@ -11,7 +11,16 @@ import java.nio.DoubleBuffer;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 
+/**
+ * Ez a controllerem egyetlen oszátlya.
+ * Az input kezeléséért felelős.
+ */
 public class ImputHandler {
+    /**
+     * Feldolgozza az inputot.
+     * @param window Az ablak melyben az inputot figyelni kell.
+     * @param picker Az egérkezelő osztály.
+     */
     public static void processInput(long window, MousePicker picker)
     {
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
@@ -37,6 +46,11 @@ public class ImputHandler {
             picker.click();
         }
     }
+
+    /**
+     * Az egér pozicióját adja vissza az ablakban.
+     * @return Az egér poziciója.
+     */
     public static Vector2f getMouse()
     {
         DoubleBuffer b1 = BufferUtils.createDoubleBuffer(1);

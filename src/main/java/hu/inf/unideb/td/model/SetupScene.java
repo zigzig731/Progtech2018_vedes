@@ -5,7 +5,14 @@ import hu.inf.unideb.td.model.managers.MaterialManager;
 import hu.inf.unideb.td.model.managers.ModelManager;
 import org.joml.Vector3f;
 
+/**
+ * A SetupScene osztály a jelenet inicializállásáért felelős.
+ */
 public class SetupScene {
+
+    /**
+     * Meghivja a különböző setupmetódusokat.
+     */
     public static void setup()
     {
         setupMaterials();
@@ -13,6 +20,9 @@ public class SetupScene {
         setupLights();
     }
 
+    /**
+     * A materialok létrehozása.
+     */
     public static void setupMaterials(){
         MaterialManager.add("forest");
         MaterialManager.add("gradient");
@@ -29,6 +39,9 @@ public class SetupScene {
 
     }
 
+    /**
+     * A modellek létrehozása.
+     */
     public static void setupModels(){
         ModelManager.add("bunny");
         ModelManager.add("bunnyHR");
@@ -47,10 +60,9 @@ public class SetupScene {
         ModelManager.add("muzzleflash");
     }
 
-    public static void setupEntities(){
-
-    }
-
+    /**
+     * A fények létrehozása.
+     */
     public static void setupLights(){
         LightManager.add(new Vector3f(5,5,-10),new Vector3f(1f,0f,0f),2, new Vector3f(8f,0.5f,0f));
         LightManager.add(new Vector3f(0,2,-8),new Vector3f(0f,0f,1f),2,new Vector3f(5f,1f,0f));

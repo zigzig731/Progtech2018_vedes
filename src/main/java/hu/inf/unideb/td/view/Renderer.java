@@ -13,11 +13,25 @@ import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 
+/**
+ * A renderer osztály.
+ * A jelenet megjelenitését végzi opengl es függvények segitségével.
+ */
 public class Renderer {
 
+    /**
+     * A rendereléshez használt shader.
+     */
     private StaticShader shader;
+    /**
+     * A rendereléshez használt vetitési mátrix.
+     */
     private Matrix4f projectionMatrix;
 
+    /**
+     * A renderer egy konstruktora
+     * @param shader A shader amivel renderelni szeretnénk.
+     */
     public Renderer(StaticShader shader){
         this.shader=shader;
         glEnable(GL_CULL_FACE);
@@ -28,14 +42,25 @@ public class Renderer {
         shader.stop();
     }
 
+    /**
+     * A renderelés projectionmátrixjának getterje.
+     * @return A projectionmátrix.
+     */
     public Matrix4f getProjectionmatrix()
     {
         return projectionMatrix;
     }
 
+    /**
+     * A renderelést előkészitő függvény.
+     */
     public void prepare(){
     }
 
+    /**
+     * A renderelést végző metódus.
+     * @param entity A megjelenitendő entitás.
+     */
     public void render(Entity entity)
     {
         prepareMaterial(entity.getMaterial(),entity.getModel().getVao());
@@ -44,6 +69,11 @@ public class Renderer {
         unbindtexturemodel();
     }
 
+    /**
+     * A material előkészitése a rendereléshez.
+     * @param mat Az előkészitendő material.
+     * @param vao A vao amiben a modell van.
+     */
     public void prepareMaterial(MaterialInstance mat, int vao){
         glBindVertexArray(vao);
         shader.loadmaterial(mat);
@@ -59,6 +89,9 @@ public class Renderer {
         glBindTexture(GL_TEXTURE_2D,mat.getNormal().getTextureID());
     }
 
+    /**
+     * A modell lecsatolását végző metódus.
+     */
     private void unbindtexturemodel()
     {
         glDisableVertexAttribArray(0);
@@ -68,6 +101,10 @@ public class Renderer {
         glBindVertexArray(0);
     }
 
+    /**
+     * Egy entity-instance előkészitését végző függvény.
+     * @param entity
+     */
     private void prepareinstance(Entity entity)
     {
         Matrix4f transform= Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation().x,entity.getRotation().y,entity.getRotation().z,entity.getScale());

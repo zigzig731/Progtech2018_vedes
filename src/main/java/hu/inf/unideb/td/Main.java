@@ -29,10 +29,18 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * A program main osztálya.
+ */
 public class Main {
 
+    /**
+     * A window melyet létrehoz az opengl.
+     */
     public static long window;
-
+    /**
+     * A player élete.
+     */
     public static int health=100;
 
     public void run() {
@@ -44,6 +52,9 @@ public class Main {
         glfwSetErrorCallback(null).free();
     }
 
+    /**
+     * Az opengl megjelenités inicializálása.
+     */
     private void init() {
         GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit())
@@ -67,6 +78,9 @@ public class Main {
 
     }
 
+    /**
+     * A main game loop.
+     */
     private void loop() {
 
         GL.createCapabilities();
@@ -205,6 +219,10 @@ public class Main {
         loader.cleanup();
     }
 
+    /**
+     * A main metódusom, innen indul a program.
+     * @param args
+     */
     public static void main(String[] args) {
         Main main = new Main();
         main.run();
