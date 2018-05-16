@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * XML root elem.
+ */
 @XmlRootElement(name="Session")
 
 /**

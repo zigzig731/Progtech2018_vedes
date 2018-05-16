@@ -4,11 +4,9 @@ import hu.inf.unideb.td.controller.ImputHandler;
 import hu.inf.unideb.td.model.*;
 import hu.inf.unideb.td.model.GameObject;
 import hu.inf.unideb.td.model.gameObjects.Enemy;
-import hu.inf.unideb.td.model.gameObjects.Tower;
 import hu.inf.unideb.td.model.SessionManagement.Session;
 import hu.inf.unideb.td.model.gameObjects.enemies.Enemy_Runner;
 import hu.inf.unideb.td.model.gameObjects.enemies.Enemy_Slow;
-import hu.inf.unideb.td.model.gameObjects.towers.AlapTorony;
 import hu.inf.unideb.td.model.managers.GameObjectManager;
 import hu.inf.unideb.td.model.managers.LightManager;
 import hu.inf.unideb.td.model.managers.MaterialManager;
@@ -20,6 +18,8 @@ import hu.inf.unideb.td.view.Renderer;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Main {
 
     /**
+     * A logger objektum létrehozása.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    /**
      * A window melyet létrehoz az opengl.
      */
     public static long window;
@@ -43,6 +47,9 @@ public class Main {
      */
     public static int health=100;
 
+    /**
+     * A loop és az init futtatását végző metódus.
+     */
     public void run() {
         init();
         loop();
@@ -56,6 +63,7 @@ public class Main {
      * Az opengl megjelenités inicializálása.
      */
     private void init() {
+        logger.info("Az ablak inicializálásának megkezdése.");
         GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit())
             throw new IllegalStateException("Unable to initialize GLFW");
@@ -75,7 +83,7 @@ public class Main {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
-
+        logger.info("Az ablak inicializálása kész.");
     }
 
     /**
@@ -87,6 +95,7 @@ public class Main {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glEnable(GL_DEPTH_TEST);
+        logger.info("Alab objektumok inicializálása.");
         Loader loader = new Loader();
         StaticShader shader = new StaticShader();
         Renderer renderer = new Renderer(shader);
@@ -114,6 +123,7 @@ public class Main {
         */
 
         //=====================================================================================================
+        logger.info("Gamefileok betöltése.");
         Texture waypointDiffuse = new Texture(loader.loadTexture("Textures/red.png"));
         SetupScene.setup();
 
@@ -135,7 +145,7 @@ public class Main {
         List<Enemy> enemies = new ArrayList<Enemy>();
         enemies.add(bloodbunny);
         float lasttime = 0;
-
+        logger.info("Pályák betöltése.");
         Session session = loader.loadSession("Session1");
         //System.out.println(session.getWaves().get(0).getWaveComponents().get(1).getType());
         glEnable(GL_BLEND);
@@ -150,13 +160,13 @@ public class Main {
         Integer currentWave = 0;
         float currentSpawnRate=1;
 
-
+        logger.info("GameLoop inditása.");
         while (!glfwWindowShouldClose(window)) {
             if(health<=0) System.exit(0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             ImputHandler.processInput(window, picker);
-
+           // logger.info("Renderelés");
             renderer.prepare();
 
             shader.start();
@@ -171,6 +181,7 @@ public class Main {
             renderer.render(gridunit);
             renderer.render(turret);
 
+           // logger.info("GameObjectek frissitése");
             for (GameObject enemy : GameObjectManager.gameObjects) {
                 enemy.display(renderer);
                 enemy.update();
@@ -216,12 +227,13 @@ public class Main {
             gridunit.setPosition(new Vector3f((int) (((float) picker.get3DPoint().x) / 4.0f) * 4, 2, (int) (((float) picker.get3DPoint().z) / 4f) * 4));
             GameObjectManager.clean();
         }
+        logger.info("Main loop lezárása.");
         loader.cleanup();
     }
 
     /**
      * A main metódusom, innen indul a program.
-     * @param args
+     * @param args A main argumentumai.
      */
     public static void main(String[] args) {
         Main main = new Main();

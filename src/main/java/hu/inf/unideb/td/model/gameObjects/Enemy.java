@@ -6,6 +6,8 @@ import hu.inf.unideb.td.model.mapElements.Path;
 import hu.inf.unideb.td.model.player.Camera;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Ez az osztály a GameObject osztályból származik.
@@ -14,6 +16,11 @@ import org.joml.Vector3f;
  * @see hu.inf.unideb.td.model.GameObject
  */
 public class Enemy extends GameObject {
+    /**
+     * A logger objektum létrehozása.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
     /**
      * Ez az ellenfél mozgási sebessége.
      * Minden ellenségtipusnál más értéket vehet fel.
@@ -128,6 +135,7 @@ public class Enemy extends GameObject {
      * létrehozza az Enemy GameObjectet alkotó Entityket.
      */
     public Enemy() {
+        logger.info("Ellenfél beidézve a pályára: ",this);
         healthBarMat = new MaterialInstance(new Vector3f(0, 1, 0));
         entities.add(new Entity(healthBarMat, "healthbar"));
         entities.get(0).setLocalPosition(new Vector3f(0, 3, 0));

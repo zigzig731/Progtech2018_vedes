@@ -51,7 +51,7 @@ public class Camera {
     }
 
     /**
-     * Ennek segitségével lekérhetjük a kamera forgását az y tengelyen
+     * Ennek segitségével lekérhetjük a kamera forgását az y tengelyen.
      * @return A kamera forgási értéke az y tengelyen.
      */
     public float getYaw() {

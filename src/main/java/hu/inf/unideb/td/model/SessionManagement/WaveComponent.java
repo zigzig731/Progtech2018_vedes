@@ -25,7 +25,7 @@ public class WaveComponent {
 
     /**
      * A komponens tipusának lekérdezésére szolgáló metódus.
-     * @return A komponens tipusa
+     * @return A komponens tipusa.
      */
     public int getType() {
         return type;
@@ -33,7 +33,7 @@ public class WaveComponent {
 
     /**
      * A komponens mennyiségének lekérdezésére szolgáló metódus.
-     * @return A komponens mennyisége
+     * @return A komponens mennyisége.
      */
     public int getAmount() {
         return amount;

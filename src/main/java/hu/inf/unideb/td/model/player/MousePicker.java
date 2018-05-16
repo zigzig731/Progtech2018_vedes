@@ -37,7 +37,7 @@ public class MousePicker {
      */
     private Matrix4f viewMatrix;
     /**
-     * A kameránkn
+     * A kameránkn.
      */
     private Camera camera;
 

@@ -10,7 +10,7 @@
 		import java.util.List;
 
         /**
-         * Az obj fileok betöltésére szolgáló osztály,
+         * Az obj fileok betöltésére szolgáló osztály.
          */
         public class NormalMappedObjLoader {
 
@@ -165,7 +165,7 @@
              * @param texturesArray Textúrakoordináták tömbje.
              * @param normalsArray Normálisok tömbje.
              * @param tangentsArray Tangentek tömbje.
-             * @return
+             * @return A konvertelt adat.
              */
             private static float convertDataToArrays(List<VertexNM> vertices, List<Vector2f> textures,
                                                      List<Vector3f> normals, float[] verticesArray, float[] texturesArray,

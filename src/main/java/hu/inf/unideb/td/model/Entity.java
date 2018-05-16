@@ -119,7 +119,7 @@ public class Entity {
     }
 
     /**
-     * Az entity méretét tudjuk vele lekérni
+     * Az entity méretét tudjuk vele lekérni.
      * @return Az entity mérete.
      */
     public float getScale() {
@@ -135,12 +135,12 @@ public class Entity {
     }
 
     /**
-     * Az entity egy konstruktora
+     * Az entity egy konstruktora.
      * @param material Az entity kivánt materialja.
      * @param model Az entity modellje.
      * @param position Az entity poziciója.
      * @param rotation Az entity forgása.
-     * @param scale Az entity mérete
+     * @param scale Az entity mérete.
      */
     public Entity(String material, String model, Vector3f position, Vector3f rotation, float scale) {
         this.material = MaterialManager.get(material);
@@ -151,7 +151,7 @@ public class Entity {
     }
 
     /**
-     * Az entity egy konstruktora
+     * Az entity egy konstruktora.
      * @param material Az entity kivánt materialja.
      * @param model Az entity modellje.
      */
@@ -161,7 +161,7 @@ public class Entity {
     }
 
     /**
-     * Az entity egy konstruktora
+     * Az entity egy konstruktora.
      * @param mat Az entity kivánt materialja.
      * @param model Az entity modellje.
      */

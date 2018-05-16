@@ -11,6 +11,9 @@ import org.joml.Vector3f;
  * @see Enemy
  */
 public class Enemy_Runner extends Enemy {
+    /**
+     * Az enemy runner konstruktora.
+     */
     public Enemy_Runner()
     {
             super.setSpeed(2f);

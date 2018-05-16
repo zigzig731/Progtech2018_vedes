@@ -12,6 +12,9 @@ import org.joml.Vector3f;
  * @see Enemy
  */
 public class Enemy_Slow extends Enemy {
+    /**
+     * Az enemy slow konstruktora.
+     */
     public Enemy_Slow()
     {
         super.setSpeed(1);

@@ -31,7 +31,7 @@ public abstract class ShaderProgram {
     private static FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 
     /**
-     * A shaderprogram egy konstruktora
+     * A shaderprogram egy konstruktora.
      * @param vertexfile A vertexshader elérési útja.
      * @param fragmentfile A fragmentshader elérési útja.
      */

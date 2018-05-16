@@ -1,5 +1,6 @@
 package hu.inf.unideb.td.model.gameObjects;
 
+import hu.inf.unideb.td.Main;
 import hu.inf.unideb.td.model.Entity;
 import hu.inf.unideb.td.model.GameObject;
 import hu.inf.unideb.td.model.Light;
@@ -8,6 +9,8 @@ import hu.inf.unideb.td.model.MaterialInstance;
 import hu.inf.unideb.td.model.managers.LightManager;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,11 @@ import static org.lwjgl.glfw.GLFW.*;
  */
 public class Tower extends GameObject {
 
+
+    /**
+     * A logger objektum létrehozása.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
     /**
      * Ez egy torony túzgyorsasága.
      * Minden toronytipusnál más értéket vehet fel.
@@ -68,6 +76,7 @@ public class Tower extends GameObject {
      * Létrehozza, és beállitja a towert alkotó entityket
      */
     public Tower() {
+        logger.info("Torony létrehozva: ",this);
         entities.add(new Entity("metal_base", "towergun"));
         entities.add(new Entity("metal_base", "towerbase"));
         entities.add(new Entity(new MaterialInstance(new Vector3f(0, 1, 0)), "rangeindicator"));
@@ -160,7 +169,9 @@ public class Tower extends GameObject {
         if (target == null) {
             getTargetsInRange();
             if (targetsInRange.size() > 0) {
+                logger.info("Célpont kiválasztása ", this);
                 target = choseTarget();
+                logger.info("Célpont kiválasztva: ", target);
             }
         } else {
             updatePose();

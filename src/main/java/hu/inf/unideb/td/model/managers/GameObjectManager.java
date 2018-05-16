@@ -22,7 +22,7 @@ public class GameObjectManager {
     public static List<GameObject> gameObjectsToRemove = new ArrayList<GameObject>();
 
     /**
-     * Ezzel a fügvénnyel visszakaphatjuk egy a listában szereplő GameObjectett,  amennyiben az nem szerepel a listában a visszaadott érték null;
+     * Ezzel a fügvénnyel visszakaphatjuk egy a listában szereplő GameObjectett,  amennyiben az nem szerepel a listában a visszaadott érték null.
      * @param gameObject A lekérdezni kivánt gameObject.
      * @return A lekérdezett gameobject referenciája, amennyiben az nem szerepel a listában, a visszatérési érték NULL.
      * @see GameObject
@@ -38,7 +38,7 @@ public class GameObjectManager {
 
     /**
      * Ezel a metódussal tudunk hozzáadni a jelenetben lévő GameObjecteket tartalmazó listához.
-     * @param gameObject A hozzáadni kivánt GameObject
+     * @param gameObject A hozzáadni kivánt GameObject.
      * @see GameObject
      */
     public static void add(GameObject gameObject)
@@ -47,7 +47,7 @@ public class GameObjectManager {
     }
 
     /**
-     * Ezzel a fügvénnyel visszakaphatjuk egy a törlendő GameObjectek listájában szereplő GameObjectett,  amennyiben az nem szerepel a listában a visszaadott érték null;
+     * Ezzel a fügvénnyel visszakaphatjuk egy a törlendő GameObjectek listájában szereplő GameObjectett,  amennyiben az nem szerepel a listában a visszaadott érték null.
      * @param gameObject A lekérdezni kivánt törlendő gameObject.
      * @return A lekérdezett gameobject referenciája, amennyiben az nem szerepel a listában, a visszatérési érték NULL.
      * @see GameObject

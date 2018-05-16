@@ -29,7 +29,7 @@ public class Renderer {
     private Matrix4f projectionMatrix;
 
     /**
-     * A renderer egy konstruktora
+     * A renderer egy konstruktora.
      * @param shader A shader amivel renderelni szeretnénk.
      */
     public Renderer(StaticShader shader){
@@ -103,7 +103,7 @@ public class Renderer {
 
     /**
      * Egy entity-instance előkészitését végző függvény.
-     * @param entity
+     * @param entity Az előkészitendő entitás.
      */
     private void prepareinstance(Entity entity)
     {

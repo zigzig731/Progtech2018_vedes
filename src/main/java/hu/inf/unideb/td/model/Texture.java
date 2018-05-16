@@ -5,7 +5,7 @@ package hu.inf.unideb.td.model;
  */
 public class Texture {
     /**
-     * A betöltött textúra opengl által kapott ID-je
+     * A betöltött textúra opengl által kapott ID-je.
      */
     private int textureID;
 

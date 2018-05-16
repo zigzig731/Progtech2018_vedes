@@ -23,7 +23,7 @@
              */
             private int textureIndex = NO_INDEX;
             /**
-             * A normális indexe
+             * A normális indexe.
              */
             private int normalIndex = NO_INDEX;
             /**
@@ -31,7 +31,7 @@
              */
             private VertexNM duplicateVertex = null;
             /**
-             * A vertex indexe,
+             * A vertex indexe.
              */
             private int index;
             /**
@@ -43,14 +43,14 @@
              */
             private List<Vector3f> tangents = new ArrayList<Vector3f>();
             /**
-             * A vertex tangentjeinek átlaga
+             * A vertex tangentjeinek átlaga.
              */
             private Vector3f averagedTangent = new Vector3f(0, 0, 0);
 
             /**
              * Egy vertex konstruktora.
-             * @param index Index
-             * @param position Pozició
+             * @param index Index.
+             * @param position Pozició.
              */
             protected VertexNM(int index, Vector3f position){
                 this.index = index;
@@ -59,7 +59,7 @@
             }
 
             /**
-             * A tangent hozzáadását lehetővé tevő metódus
+             * A tangent hozzáadását lehetővé tevő metódus.
              * @param tangent A hozzáadni kivánt tangent.
              */
             protected void addTangent(Vector3f tangent){
@@ -124,7 +124,7 @@
              * Ugyan az e a normál és textúrakoordinátája mint egy másik térpont.
              * @param textureIndexOther A másik vertex textúraindexe.
              * @param normalIndexOther A másik térpont normális indexe.
-             * @return Igen ha ugyan az, nem ha nem ugyan az, (true/false) érték
+             * @return Igen ha ugyan az, nem ha nem ugyan az, (true/false) érték.
              */
             protected boolean hasSameTextureAndNormal(int textureIndexOther,int normalIndexOther){
                 return textureIndexOther==textureIndex && normalIndexOther==normalIndex;
@@ -155,7 +155,7 @@
 
             /**
              * A vertex textúraindexének lekérését biztositó getter.
-             * @return A vertex textúraindexe
+             * @return A vertex textúraindexe.
              */
             protected int getTextureIndex() {
                 return textureIndex;

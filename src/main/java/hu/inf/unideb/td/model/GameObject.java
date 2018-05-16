@@ -85,7 +85,7 @@ public abstract class GameObject {
 
     /**
      * A gameobjecten meghivva a display methodot, megjeleniti magát a renderer segitségével.
-     * @param renderer
+     * @param renderer A renderer amivel a megjelenitést végezzük.
      * @see Renderer
      */
     public void display(Renderer renderer)
